@@ -6,6 +6,6 @@ describe('Header', () => {
     render(<Header />);
 
     screen.getByText(/Toss/);
-    screen.getByRole('button');
+    screen.getByRole('button', { name: 'hamburger' });
   });
 });
