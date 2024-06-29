@@ -1,6 +1,6 @@
 import { Asset, AssetResponse } from '../types';
 
-const comparePrice = (curAsset: Asset, prevAssetResponse: AssetResponse) => {
+const comparePrice = (curAsset: Asset, prevAssetResponse?: AssetResponse) => {
   return (
     curAsset.price -
     (prevAssetResponse

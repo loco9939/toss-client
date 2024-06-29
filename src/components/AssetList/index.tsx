@@ -1,4 +1,7 @@
 import { ASSET_DISPLAY, Asset, AssetResponse } from '../../types';
+
+import convertPrice from '@/utils/convertPrice';
+import comparePrice from '../../utils/comparePrice';
 import convertKRW from '../../utils/convertKRW';
 
 type AssetListProps = {
@@ -10,13 +13,10 @@ const AssetList = ({ assetList, prevAsset }: AssetListProps) => {
   return (
     <ul>
       {assetList.map(asset => {
-        const priceComparison =
-          asset.price -
-          (prevAsset
-            ? prevAsset[asset.name as keyof Omit<AssetResponse, 'id' | 'date'>]
-            : asset.price);
+        const priceComparison = comparePrice(asset,prevAsset);
+        const convertedPrice = convertPrice(priceComparison)
         return (
-          <li>
+          <li key={asset.name}>
             <i>icon</i>
             <div>
               <div>
@@ -25,7 +25,7 @@ const AssetList = ({ assetList, prevAsset }: AssetListProps) => {
               </div>
               <div>
                 <p>7%</p>
-                {prevAsset && <p>지난달보다 +00만원</p>}
+                {prevAsset && <p>지난달보다 {convertedPrice}</p>}
               </div>
             </div>
           </li>
