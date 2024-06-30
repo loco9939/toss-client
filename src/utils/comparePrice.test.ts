@@ -1,4 +1,4 @@
-import fixtures from '../fixtures';
+import fixtures from '@/fixtures';
 import comparePrice from './comparePrice';
 import convertAssetResponse from './convertAssetResponse';
 

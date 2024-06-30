@@ -1,5 +1,5 @@
-import convertKRW from '../../utils/convertKRW';
-import BarChart from '../BarChart';
+import BarChart from '@/components/BarChart';
+import convertKRW from '@/utils/convertKRW';
 
 const Summary = () => {
   return (

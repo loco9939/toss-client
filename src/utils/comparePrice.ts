@@ -1,4 +1,4 @@
-import { Asset, AssetResponse } from '../types';
+import { Asset, AssetResponse } from '@/types';
 
 const comparePrice = (curAsset: Asset, prevAssetResponse?: AssetResponse) => {
   return (

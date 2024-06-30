@@ -5,9 +5,10 @@ import routes from './routes';
 const context = describe;
 describe('Routes', () => {
   context('when the current path is "/"', () => {
-    it('renders Toss', () => {
+    it('renders `Header` Toss', () => {
       renderRouter('/');
-      screen.getByText(/Toss/);
+
+      screen.getByRole('heading',{name:'Toss'})
     });
   });
 });

@@ -1,12 +1,8 @@
-import AssetList from '../components/AssetList';
-import Summary from '../components/Summary';
+import Home from '@/components/Home';
 
 const HomePage = () => {
   return (
-    <div>
-      <Summary />
-      <AssetList assetList={[]} />
-    </div>
+    <Home />
   );
 };
 

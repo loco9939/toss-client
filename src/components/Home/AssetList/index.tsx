@@ -1,8 +1,8 @@
-import { ASSET_DISPLAY, Asset, AssetResponse } from '../../types';
+import { ASSET_DISPLAY, Asset, AssetResponse } from '@/types';
 
 import convertPrice from '@/utils/convertPrice';
-import comparePrice from '../../utils/comparePrice';
-import convertKRW from '../../utils/convertKRW';
+import comparePrice from '@/utils/comparePrice';
+import convertKRW from '@/utils/convertKRW';
 
 type AssetListProps = {
   assetList: Asset[];

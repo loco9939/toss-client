@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import AssetList from '.';
-import fixtures from '../../fixtures';
-import convertAssetResponse from '../../utils/convertAssetResponse';
+import fixtures from '@/fixtures';
+import convertAssetResponse from '@/utils/convertAssetResponse';
 
 const { assetResponse, prevAssetResponse } = fixtures;
 const assetList = convertAssetResponse(assetResponse);

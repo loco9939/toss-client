@@ -1,4 +1,4 @@
-import { Asset, AssetResponse } from '../types';
+import { Asset, AssetResponse } from '@/types';
 
 const convertAssetResponse = (asset: AssetResponse): Asset[] => {
   const assetList: Asset[] = [];
