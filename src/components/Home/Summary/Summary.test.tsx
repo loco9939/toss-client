@@ -12,9 +12,9 @@ describe('Summary', () => {
     expect(screen.getByText(/원/));
   });
 
-  it('renders bar chart', () => {
+  it('renders summary bar chart', () => {
     render(<Summary assetList={assetList} />);
 
-    expect(screen.getByRole('bar-chart'));
+    expect(screen.getByRole('summary-bar-chart'));
   });
 });

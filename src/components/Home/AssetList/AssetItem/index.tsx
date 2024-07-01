@@ -42,6 +42,7 @@ const TextSecRow = styled.div`
 const AssetItem = ({ asset, prevAsset }: AssetItemProps) => {
   const priceComparison = comparePrice(asset, prevAsset);
   const convertedPrice = convertPrice(priceComparison);
+  const isPositiveInt = priceComparison > 0;
   return (
     <ListItem>
       <Icon role='icon' />
@@ -52,7 +53,12 @@ const AssetItem = ({ asset, prevAsset }: AssetItemProps) => {
         </TextFirRow>
         <TextSecRow>
           <p>7%</p>
-          {prevAsset && <p>지난달보다 {convertedPrice}</p>}
+          {prevAsset && (
+            <p>
+              지난달보다
+              {`${isPositiveInt ? '+' : '-'}${convertedPrice}`}
+            </p>
+          )}
         </TextSecRow>
       </TextBoxWrapper>
     </ListItem>

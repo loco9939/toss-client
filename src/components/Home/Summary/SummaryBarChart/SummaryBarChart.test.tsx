@@ -9,8 +9,8 @@ describe('BarChart', () => {
     render(<BarChart assetList={assetList} />);
   });
 
-  it('renders "bar-chart" and "bar" role element', () => {
-    expect(screen.getByRole('bar-chart'));
+  it('renders "summary-bar-chart" and "bar" role element', () => {
+    expect(screen.getByRole('summary-bar-chart'));
     expect(screen.getByRole('dw-bar'));
     expect(screen.getByRole('saving-bar'));
     expect(screen.getByRole('investment-bar'));
