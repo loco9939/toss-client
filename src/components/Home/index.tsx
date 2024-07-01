@@ -8,6 +8,7 @@ import Summary from './Summary';
 
 const Home = () => {
   const [asset, setAsset] = useState<AssetResponse | null>(null);
+  const [loading, setLoading] = useState<boolean>(false);
 
   useEffect(() => {
     const getCurrentAsset = async () => {
@@ -23,13 +24,17 @@ const Home = () => {
         const { data } = response;
         setAsset(data);
       } catch (error) {
-        return new Error(`${error}`);
+        new Error(`${error}`);
       }
+      setLoading(true);
     };
 
     getCurrentAsset();
-    // setAsset(assetResponse);
   }, []);
+
+  if (!loading) {
+    return null;
+  }
 
   if (!asset) {
     return <p>실패...</p>;

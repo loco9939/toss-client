@@ -34,10 +34,9 @@ describe('Home', () => {
       render(<Home />);
     });
 
-    // Question: API 모킹 실패처리 하지 않아도 왜 screen.queryByText(/총자산/).toBeNull()이 통과되는지?
     it('renders nothing', async () => {
       await waitFor(() => {
-        expect(screen.queryByText(/총자산/)).toBeNull();
+        expect(screen.getByText(/실패/));
       });
     });
   });
