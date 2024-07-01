@@ -5,7 +5,7 @@ const prevAssetResponse = {
   saving: 1_000_000,
   investment: 4_000_000,
   pension: 1_500_000,
-  dept: 5_000_000,
+  debt: 5_000_000,
 };
 
 export default prevAssetResponse;

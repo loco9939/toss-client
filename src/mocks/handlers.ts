@@ -1,6 +1,6 @@
 import { http, HttpResponse } from 'msw';
 
-export const getAssetResponse = (type?: 'Error') => {
+export const mockGetAssetResponse = (type?: 'Error') => {
   return http.get('http://localhost:5000/assets:id', ({ request }) => {
     const url = new URL(request.url);
     const assetId = url.searchParams.get('id');
@@ -15,9 +15,9 @@ export const getAssetResponse = (type?: 'Error') => {
       saving: 1_500_000,
       investment: 4_100_000,
       pension: 1_600_000,
-      dept: 4_000_000,
+      debt: 4_000_000,
     });
   });
 };
 
-export const handlers = [getAssetResponse()];
+export const handlers = [mockGetAssetResponse()];

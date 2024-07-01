@@ -5,7 +5,7 @@ export type AssetResponse = {
   saving: number;
   investment: number;
   pension: number;
-  dept: number;
+  debt: number;
 };
 
 export type Asset = {
@@ -18,5 +18,5 @@ export const ASSET_DISPLAY: { [key: string]: string } = {
   saving: '저축',
   investment: '투자',
   pension: '연금',
-  dept: '부채',
+  debt: '부채',
 };
