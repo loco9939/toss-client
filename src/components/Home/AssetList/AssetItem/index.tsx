@@ -28,13 +28,13 @@ const TextBoxWrapper = styled.div`
   flex-grow: 1;
 `;
 
-const TextLeftBox = styled.div`
+const TextFirRow = styled.div`
   display: flex;
   justify-content: space-between;
   margin-bottom: 4px;
 `;
 
-const TextRightBox = styled.div`
+const TextSecRow = styled.div`
   display: flex;
   justify-content: space-between;
 `;
@@ -44,16 +44,16 @@ const AssetItem = ({ asset, prevAsset }: AssetItemProps) => {
   const convertedPrice = convertPrice(priceComparison);
   return (
     <ListItem>
-      <Icon />
-      <TextBoxWrapper>
-        <TextLeftBox>
+      <Icon role='icon' />
+      <TextBoxWrapper role='info'>
+        <TextFirRow>
           <p>{ASSET_DISPLAY[asset.name]}</p>
           <p>{convertKRW(asset.price)}원</p>
-        </TextLeftBox>
-        <TextRightBox>
+        </TextFirRow>
+        <TextSecRow>
           <p>7%</p>
           {prevAsset && <p>지난달보다 {convertedPrice}</p>}
-        </TextRightBox>
+        </TextSecRow>
       </TextBoxWrapper>
     </ListItem>
   );
