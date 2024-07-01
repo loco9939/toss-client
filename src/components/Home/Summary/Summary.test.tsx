@@ -1,17 +1,20 @@
-import { render, screen } from '@testing-library/react';
+import fixtures from '@/fixtures';
+import { render } from '@/utils/test-helpers';
+import { screen } from '@testing-library/react';
 import Summary from '.';
 
+const { assetList } = fixtures;
 describe('Summary', () => {
   it('renders asset price', () => {
-    render(<Summary />);
+    render(<Summary assetList={assetList} />);
 
     expect(screen.getByRole('heading', { name: '총자산' }));
     expect(screen.getByText(/원/));
   });
 
   it('renders bar chart', () => {
-    render(<Summary />);
+    render(<Summary assetList={assetList} />);
 
-    expect(screen.getByRole('BarChart'));
+    expect(screen.getByRole('bar-chart'));
   });
 });

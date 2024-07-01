@@ -1,4 +1,5 @@
-import { render, screen } from '@testing-library/react';
+import { render } from '@/utils/test-helpers';
+import { screen } from '@testing-library/react';
 import Header from '.';
 
 describe('Header', () => {
@@ -6,6 +7,6 @@ describe('Header', () => {
     render(<Header />);
 
     screen.getByText(/Toss/);
-    screen.getByRole('button', { name: 'hamburger' });
+    screen.getByRole('menu');
   });
 });

@@ -1,10 +1,10 @@
-import { render, screen } from '@testing-library/react';
-import AssetList from '.';
 import fixtures from '@/fixtures';
-import convertAssetResponse from '@/utils/convertAssetResponse';
+import { render } from '@/utils/test-helpers';
+import { screen } from '@testing-library/react';
+import AssetList from '.';
 
-const { assetResponse, prevAssetResponse } = fixtures;
-const assetList = convertAssetResponse(assetResponse);
+const { assetList, prevAssetResponse } = fixtures;
+
 describe('AssetList', () => {
   it('renders "입출금", "저축", "투자", "연금", "부채"', () => {
     render(<AssetList assetList={assetList} />);

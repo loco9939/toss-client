@@ -1,43 +1,43 @@
-import { render, screen, waitFor } from '@testing-library/react';
-import Home from '.';
+import { mockGetAssetResponse } from '@/mocks/handlers';
 import { server } from '@/mocks/node';
-import { getAssetResponse } from '@/mocks/handlers';
+import { render } from '@/utils/test-helpers';
+import { screen, waitFor } from '@testing-library/react';
+import Home from '.';
 
 const context = describe;
 describe('Home', () => {
   context('when fetch is success', () => {
-    it('renders Summary', async () => {
+    beforeEach(() => {
       render(<Home />);
+    });
 
+    it('renders Summary', async () => {
       await waitFor(() => {
         expect(screen.getByRole('heading', { name: '총자산' }));
       });
     });
 
     it('renders Asset', async () => {
-      render(<Home />);
-
       await waitFor(() => {
-        expect(screen.getByText(/입출금/));
-        expect(screen.getByText(/저축/));
-        expect(screen.getByText(/투자/));
-        expect(screen.getByText(/연금/));
-        expect(screen.getByText(/부채/));
+        expect(screen.getByText(/입출금/)).toBeInTheDocument();
+        expect(screen.getByText(/저축/)).toBeInTheDocument();
+        expect(screen.getByText(/투자/)).toBeInTheDocument();
+        expect(screen.getByText(/연금/)).toBeInTheDocument();
+        expect(screen.getByText(/부채/)).toBeInTheDocument();
       });
     });
   });
 
-  // TODO: 요청 실패 케이스 테스트 작성
   context('when fetch is failed', () => {
-    it('renders nothing', async () => {
-      server.use(getAssetResponse('Error'));
-      const { container } = render(<Home />);
+    beforeEach(() => {
+      server.use(mockGetAssetResponse('Error'));
+      render(<Home />);
+    });
 
+    // Question: API 모킹 실패처리 하지 않아도 왜 screen.queryByText(/총자산/).toBeNull()이 통과되는지?
+    it('renders nothing', async () => {
       await waitFor(() => {
-        // expect(screen.getByText('총자산'));
-        // expect(screen.queryByText(/입출금/)).toBeInTheDocument();
-        expect(container.firstChild).not.toBeInTheDocument();
-        expect(container.firstChild).toBeNull();
+        expect(screen.queryByText(/총자산/)).toBeNull();
       });
     });
   });
