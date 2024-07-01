@@ -8,9 +8,8 @@ const StyledLayout = styled.div`
   display: grid;
   grid-template-rows: auto 1fr auto;
 
-  width: 480px;
+  width: 375px;
   margin-inline: auto;
-  background-color: lightgray;
 `;
 
 const Layout = () => {

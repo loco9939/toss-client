@@ -1,13 +1,20 @@
 import BarChart from '@/components/BarChart';
+import { Asset } from '@/types';
 import convertKRW from '@/utils/convertKRW';
+import getTotalAssets from '@/utils/getTotalAsset';
 
-const Summary = () => {
+type SummaryProps = {
+  assetList: Asset[];
+};
+
+const Summary = ({ assetList }: SummaryProps) => {
+  const totalAssetPrice = getTotalAssets(assetList);
   return (
     <section>
       <h2>총자산</h2>
-      <span>{convertKRW(16523456)}원</span>
+      <span>{convertKRW(totalAssetPrice)}원</span>
 
-      <BarChart />
+      <BarChart assetList={assetList} />
     </section>
   );
 };

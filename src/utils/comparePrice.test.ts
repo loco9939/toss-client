@@ -1,9 +1,7 @@
 import fixtures from '@/fixtures';
 import comparePrice from './comparePrice';
-import convertAssetResponse from './convertAssetResponse';
 
-const { assetResponse, prevAssetResponse } = fixtures;
-const assetList = convertAssetResponse(assetResponse);
+const { assetList, prevAssetResponse } = fixtures;
 describe('comparePrice', () => {
   it('returns the gap between prev asset and curr asset', () => {
     const dwAsset = assetList.find(asset => asset.name === 'dw') ?? {
@@ -22,10 +20,10 @@ describe('comparePrice', () => {
   });
 
   it('returns the gap between prev asset and curr asset', () => {
-    const deptAsset = assetList.find(asset => asset.name === 'dept') ?? {
-      name: 'dept',
+    const debtAsset = assetList.find(asset => asset.name === 'debt') ?? {
+      name: 'debt',
       price: 0,
     };
-    expect(comparePrice(deptAsset, prevAssetResponse)).toBe(-1000000);
+    expect(comparePrice(debtAsset, prevAssetResponse)).toBe(-1000000);
   });
 });
