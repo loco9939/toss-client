@@ -1,4 +1,6 @@
-const latestAssetsResponse = [
+import { LatestAsset } from '@/types';
+
+const latestAssetsResponse: LatestAsset[] = [
   {
     asset_id: 10,
     user_id: 1,

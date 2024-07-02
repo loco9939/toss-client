@@ -1,46 +1,18 @@
-import { API_BASE_URL } from '@/api';
-import useFetchLatestAssets from '@/hooks/useFetchLatestAssets';
-import { AssetResponse } from '@/types';
-import convertAssetResponse from '@/utils/convertAssetResponse';
-import axios, { AxiosResponse } from 'axios';
-import { useEffect, useState } from 'react';
+import Summary from './Summary';
 import AssetList from './AssetList';
 import MonthlyChart from './MonthlyChart';
-import Summary from './Summary';
+
+import useFetchLatestAssets from '@/hooks/useFetchLatestAssets';
+
+import convertAssetResponse from '@/utils/convertAssetResponse';
 
 const Home = () => {
-  const [asset, setAsset] = useState<AssetResponse | null>(null);
-  const [loading, setLoading] = useState<boolean>(false);
+  const { loading, latestAssets } = useFetchLatestAssets();
 
-  useEffect(() => {
-    const getCurrentAsset = async () => {
-      try {
-        const response: AxiosResponse<AssetResponse> = await axios.get(
-          `${API_BASE_URL}/assets:id`,
-          {
-            params: {
-              id: 'cur-id',
-            },
-          },
-        );
-        const { data } = response;
-        setAsset(data);
-      } catch (error) {
-        new Error(`${error}`);
-      }
-      setLoading(true);
-    };
+  const asset = latestAssets[0];
 
-    getCurrentAsset();
-    // setAsset(assetResponse);
-  }, []);
-
-  const { latestAssets } = useFetchLatestAssets();
-
-  // const asset = latestAssets[0];
-
-  if (!loading) {
-    return null;
+  if (loading) {
+    return <p>로딩중...</p>;
   }
 
   if (!asset) {

@@ -1,6 +1,6 @@
-import { Asset, AssetResponse } from '@/types';
+import { Asset } from '@/types';
 
-const convertAssetResponse = (asset: AssetResponse): Asset[] => {
+const convertAssetResponse = (asset: Record<string, number>): Asset[] => {
   const assetList: Asset[] = [];
 
   Object.entries(asset).forEach(([key, value]) => {

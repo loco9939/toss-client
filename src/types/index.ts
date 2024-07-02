@@ -19,6 +19,13 @@ export type Asset = {
   price: number;
 };
 
+export type LatestAsset = {
+  asset_id: number;
+  user_id: number;
+  assets: Record<string, number>;
+  date: string;
+};
+
 export const ASSET_DISPLAY: { [key: string]: string } = {
   dw: '입출금',
   saving: '저축',

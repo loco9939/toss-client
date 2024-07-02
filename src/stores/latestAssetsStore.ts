@@ -1,26 +1,40 @@
-import { API_BASE_URL } from '@/api';
-import { AssetResponse } from '@/types';
 import axios from 'axios';
 import { create } from 'zustand';
 
+import { API_BASE_URL } from '@/api';
+
+import { LatestAsset } from '@/types';
+
 export type LatestAssetsStore = {
   loading: boolean;
-  latestAssets: AssetResponse[];
+  latestAssets: Record<string, number>[];
+  startLoading: () => void;
+  finishLoading: () => void;
   fetchLatestAssets: () => Promise<void>;
 };
 
-const latestAssetsStore = create<LatestAssetsStore>(set => ({
+const latestAssetsStore = create<LatestAssetsStore>((set, get) => ({
   loading: false,
   latestAssets: [],
-  fetchLatestAssets: async () => {
+  startLoading: () => {
     set(() => ({ loading: true }));
-    try {
-      const { data } = await axios.get(`${API_BASE_URL}/assets/latest`);
-      set(() => ({ latestAssets: data }));
-    } catch {
-      throw new Error('Failed: assets/latest');
-    }
+  },
+  finishLoading: () => {
     set(() => ({ loading: false }));
+  },
+  fetchLatestAssets: async () => {
+    get().startLoading();
+    try {
+      const { data } = await axios.get<LatestAsset[]>(
+        `${API_BASE_URL}/assets/latest`,
+      );
+      const latestAssetsRes = data.map(d => d.assets);
+      set(() => ({ latestAssets: latestAssetsRes }));
+    } catch (error) {
+      new Error(`${error}`);
+    } finally {
+      get().finishLoading();
+    }
   },
 }));
 

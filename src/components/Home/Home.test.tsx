@@ -1,8 +1,9 @@
-import { mockGetAssetResponse } from '@/mocks/handlers';
+import Home from '.';
+import { screen, waitFor } from '@testing-library/react';
+
 import { server } from '@/mocks/node';
 import { render } from '@/utils/test-helpers';
-import { screen, waitFor } from '@testing-library/react';
-import Home from '.';
+import { mockGetLatestAssets } from '@/mocks/handlers';
 
 // Mocking recharts
 vi.mock('recharts', () => ({
@@ -45,7 +46,7 @@ describe('Home', () => {
 
   context('when fetch is failed', () => {
     beforeEach(() => {
-      server.use(mockGetAssetResponse('Error'));
+      server.use(mockGetLatestAssets('Error'));
       render(<Home />);
     });
 
