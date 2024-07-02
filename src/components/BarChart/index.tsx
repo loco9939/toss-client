@@ -5,7 +5,6 @@ import {
   Bar,
   Cell,
   LabelList,
-  Legend,
   BarChart as OriginBarChart,
   Rectangle,
   ResponsiveContainer,
@@ -21,14 +20,21 @@ type BarChartProps = {
 const Container = styled.div.attrs({
   role: 'bar-chart',
 })`
+  position: relative;
   width: 100%;
-  height: 200px;
+  height: 225px;
   margin-top: 48px;
 
   .recharts-label-list {
     font-weight: ${props => props.theme.font.light};
     font-size: 1.4rem;
   }
+`;
+
+const Legend = styled.div`
+  position: absolute;
+  bottom: -32px;
+  color: ${props => props.theme.colors['text-secondary']};
 `;
 
 const labelListFormatter = (value: number) => {
@@ -108,12 +114,12 @@ const BarChart = ({ data }: BarChartProps) => {
           <XAxis
             dataKey='name'
             tickLine={false}
-            tickMargin={10}
+            tickMargin={8}
             strokeDasharray={2}
             style={{ fill: defaultTheme.colors['text-secondary'] }}
             tick={renderCustomAxisTick}
           />
-          <Legend
+          {/* <Legend
             align='left'
             payload={[{ value: '만원 단위' }]}
             wrapperStyle={{
@@ -122,9 +128,10 @@ const BarChart = ({ data }: BarChartProps) => {
               left: '-16px',
               color: defaultTheme.colors['text-secondary'],
             }}
-          />
+          /> */}
         </OriginBarChart>
       </ResponsiveContainer>
+      <Legend>만원 단위</Legend>
     </Container>
   );
 };
