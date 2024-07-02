@@ -13,7 +13,7 @@ function App() {
     <ThemeProvider theme={theme}>
       <Reset />
       <GlobalStyle />
-      <RouterProvider router={router} />;
+      <RouterProvider router={router} />
     </ThemeProvider>
   );
 }
