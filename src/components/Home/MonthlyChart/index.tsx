@@ -1,13 +1,11 @@
 import BarChart from '@/components/BarChart';
-import fixtures from '@/fixtures';
-import { Asset } from '@/types';
+import convertAssetResponse from '@/utils/convertAssetResponse';
 import convertPrice from '@/utils/convertPrice';
 import getTotalAssets from '@/utils/getTotalAsset';
 import styled from 'styled-components';
 
 type MonthlyChartProps = {
-  assetList: Asset[];
-  prevAssetList: Asset[];
+  latestAssets: Record<string, number | string>[];
 };
 
 const Container = styled.div`
@@ -30,14 +28,19 @@ const Emoji = styled.p`
   font-size: 4rem;
 `;
 
-const { latestAssets } = fixtures;
-const MonthlyChart = ({ assetList, prevAssetList }: MonthlyChartProps) => {
-  const totalAssetPrice = getTotalAssets(assetList);
+const MonthlyChart = ({ latestAssets }: MonthlyChartProps) => {
+  const [currentAsset, prevAsset] = latestAssets;
+  const currentAssetList = convertAssetResponse(currentAsset);
+  const prevAssetList = convertAssetResponse(prevAsset);
+  const totalAssetPrice = getTotalAssets(currentAssetList);
   const totalPrevAssetPrice = getTotalAssets(prevAssetList);
 
   const comparisonPrice = totalAssetPrice - totalPrevAssetPrice;
   const isPositiveInt = comparisonPrice > 0;
   const priceStr = convertPrice(comparisonPrice);
+
+  // [{dw:13,saving:14}, ...]
+  // [{name:'1월', amount:13+14}]
   return (
     <Container>
       <Summary>
@@ -50,7 +53,7 @@ const MonthlyChart = ({ assetList, prevAssetList }: MonthlyChartProps) => {
         </TextBox>
         <Emoji>😀</Emoji>
       </Summary>
-      <BarChart data={latestAssets} />
+      <BarChart data={[]} />
     </Container>
   );
 };

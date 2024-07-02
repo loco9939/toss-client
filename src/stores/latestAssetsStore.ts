@@ -7,7 +7,7 @@ import { LatestAsset } from '@/types';
 
 export type LatestAssetsStore = {
   loading: boolean;
-  latestAssets: Record<string, number>[];
+  latestAssets: Record<string, number | string>[];
   startLoading: () => void;
   finishLoading: () => void;
   fetchLatestAssets: () => Promise<void>;
@@ -28,7 +28,7 @@ const latestAssetsStore = create<LatestAssetsStore>((set, get) => ({
       const { data } = await axios.get<LatestAsset[]>(
         `${API_BASE_URL}/assets/latest`,
       );
-      const latestAssetsRes = data.map(d => d.assets);
+      const latestAssetsRes = data.map(d => ({ ...d.assets, date: d.date }));
       set(() => ({ latestAssets: latestAssetsRes }));
     } catch (error) {
       new Error(`${error}`);

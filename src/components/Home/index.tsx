@@ -9,26 +9,23 @@ import convertAssetResponse from '@/utils/convertAssetResponse';
 const Home = () => {
   const { loading, latestAssets } = useFetchLatestAssets();
 
-  const asset = latestAssets[0];
-  const prevAsset = latestAssets[1];
-
   if (loading) {
     return <p>로딩중...</p>;
   }
 
-  console.log('asset', latestAssets);
-  if (!asset) {
+  if (latestAssets.length === 0) {
     return <p>실패...</p>;
   }
 
-  const assetList = convertAssetResponse(asset);
-  const prevAssetList = convertAssetResponse(prevAsset);
+  const currentAsset = latestAssets[0];
+
+  const currentAssetList = convertAssetResponse(currentAsset);
 
   return (
     <>
-      <Summary assetList={assetList} />
-      <AssetList assetList={assetList} />
-      <MonthlyChart assetList={assetList} prevAssetList={prevAssetList} />
+      <Summary assetList={currentAssetList} />
+      <AssetList assetList={currentAssetList} />
+      <MonthlyChart latestAssets={latestAssets} />
     </>
   );
 };

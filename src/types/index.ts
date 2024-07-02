@@ -22,7 +22,7 @@ export type Asset = {
 export type LatestAsset = {
   asset_id: number;
   user_id: number;
-  assets: Record<string, number>;
+  assets: Record<string, number | string>;
   date: string;
 };
 

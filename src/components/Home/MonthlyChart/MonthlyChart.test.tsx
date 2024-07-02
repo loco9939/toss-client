@@ -1,5 +1,4 @@
 import fixtures from '@/fixtures';
-import convertAssetResponse from '@/utils/convertAssetResponse';
 import { render } from '@/utils/test-helpers';
 import { screen } from '@testing-library/dom';
 import MonthlyChart from '.';
@@ -19,14 +18,14 @@ vi.mock('recharts', () => ({
   // 필요한 다른 recharts 컴포넌트와 함수들을 추가로 mock 합니다.
 }));
 
-const { assetResponse, prevAssetResponse } = fixtures;
-const assetList = convertAssetResponse(assetResponse);
-const prevAssetList = convertAssetResponse(prevAssetResponse);
+const { latestAssetsResponse } = fixtures;
+const latestAssets = latestAssetsResponse.map(asset => ({
+  ...asset.assets,
+  date: asset.date,
+}));
 describe('MonthlyChart', () => {
   beforeEach(() => {
-    render(
-      <MonthlyChart assetList={assetList} prevAssetList={prevAssetList} />,
-    );
+    render(<MonthlyChart latestAssets={latestAssets} />);
   });
 
   it('renders summary text', () => {
