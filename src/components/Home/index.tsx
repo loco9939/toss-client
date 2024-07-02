@@ -1,4 +1,5 @@
 import { API_BASE_URL } from '@/api';
+import useFetchLatestAssets from '@/hooks/useFetchLatestAssets';
 import { AssetResponse } from '@/types';
 import convertAssetResponse from '@/utils/convertAssetResponse';
 import axios, { AxiosResponse } from 'axios';
@@ -33,6 +34,10 @@ const Home = () => {
     getCurrentAsset();
     // setAsset(assetResponse);
   }, []);
+
+  const { latestAssets } = useFetchLatestAssets();
+
+  // const asset = latestAssets[0];
 
   if (!loading) {
     return null;

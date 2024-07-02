@@ -1,5 +1,8 @@
+import { API_BASE_URL } from '@/api';
+import fixtures from '@/fixtures';
 import { http, HttpResponse } from 'msw';
 
+const { latestAssetsResponse } = fixtures;
 export const mockGetAssetResponse = (type?: 'Error') => {
   return http.get('http://localhost:5000/assets:id', ({ request }) => {
     const url = new URL(request.url);
@@ -20,4 +23,14 @@ export const mockGetAssetResponse = (type?: 'Error') => {
   });
 };
 
-export const handlers = [mockGetAssetResponse()];
+export const mockGetLatestAssets = (type?: 'Error') => {
+  return http.get(`${API_BASE_URL}/assets/latest`, () => {
+    if (type === 'Error') {
+      return new HttpResponse(null, { status: 404 });
+    }
+
+    return HttpResponse.json(latestAssetsResponse);
+  });
+};
+
+export const handlers = [mockGetAssetResponse(), mockGetLatestAssets()];
