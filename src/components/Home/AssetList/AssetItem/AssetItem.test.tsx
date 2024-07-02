@@ -7,7 +7,7 @@ const { assetList, prevAssetResponse } = fixtures;
 describe('AssetItem', () => {
   it('renders icon, info', () => {
     const firstAsset = assetList[0];
-    render(<AssetItem asset={firstAsset} />);
+    render(<AssetItem asset={firstAsset} totalPrice={11400000} />);
     expect(screen.getByRole('icon'));
     expect(screen.getByRole('info'));
     expect(screen.queryByText(/지난달/)).toBeNull();
@@ -15,7 +15,13 @@ describe('AssetItem', () => {
 
   it('when it received prev props, it renders "지난달" too', () => {
     const firstAsset = assetList[0];
-    render(<AssetItem asset={firstAsset} prevAsset={prevAssetResponse} />);
+    render(
+      <AssetItem
+        asset={firstAsset}
+        prevAsset={prevAssetResponse}
+        totalPrice={11400000}
+      />,
+    );
     expect(screen.getByRole('icon'));
     expect(screen.getByRole('info'));
     expect(screen.getByText(/지난달/));

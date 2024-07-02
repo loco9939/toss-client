@@ -4,6 +4,7 @@ import convertAssetResponse from '@/utils/convertAssetResponse';
 import axios, { AxiosResponse } from 'axios';
 import { useEffect, useState } from 'react';
 import AssetList from './AssetList';
+import MonthlyChart from './MonthlyChart';
 import Summary from './Summary';
 
 const Home = () => {
@@ -30,6 +31,7 @@ const Home = () => {
     };
 
     getCurrentAsset();
+    // setAsset(assetResponse);
   }, []);
 
   if (!loading) {
@@ -43,10 +45,11 @@ const Home = () => {
   const assetList = convertAssetResponse(asset);
 
   return (
-    <div>
+    <>
       <Summary assetList={assetList} />
       <AssetList assetList={assetList} />
-    </div>
+      <MonthlyChart assetList={assetList} prevAssetList={assetList} />
+    </>
   );
 };
 

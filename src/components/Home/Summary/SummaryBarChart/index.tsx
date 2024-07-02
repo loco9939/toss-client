@@ -11,7 +11,7 @@ const Container = styled.div.attrs({
 })`
   display: flex;
   gap: 2px;
-  height: 36px;
+  height: 28px;
   border-radius: 12px;
   overflow: hidden;
 `;

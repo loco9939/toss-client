@@ -3,9 +3,10 @@ import { screen } from '@testing-library/react';
 import Footer from '.';
 
 describe('Footer', () => {
-  it('renders footer description', () => {
+  it('renders footer', () => {
     render(<Footer />);
 
-    screen.getByText(/footer/);
+    screen.getByText(/SNS/);
+    screen.getByText(/연락처/);
   });
 });

@@ -1,18 +1,29 @@
 import { Asset } from '@/types';
 import convertKRW from '@/utils/convertKRW';
 import getTotalAssets from '@/utils/getTotalAsset';
+import styled from 'styled-components';
 import SummaryBarChart from './SummaryBarChart';
 
 type SummaryProps = {
   assetList: Asset[];
 };
 
+const Title = styled.h2`
+  color: ${props => props.theme.colors['text-secondary']};
+`;
+
+const Price = styled.p`
+  margin-top: 12px;
+  margin-bottom: 24px;
+  font-size: ${props => props.theme.fontSize.lg};
+`;
+
 const Summary = ({ assetList }: SummaryProps) => {
   const totalAssetPrice = getTotalAssets(assetList);
   return (
     <section>
-      <h2>총자산</h2>
-      <span>{convertKRW(totalAssetPrice)}원</span>
+      <Title>총자산</Title>
+      <Price>{convertKRW(totalAssetPrice)}원</Price>
 
       <SummaryBarChart assetList={assetList} />
     </section>
