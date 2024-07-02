@@ -10,6 +10,10 @@ const StyledLayout = styled.div`
 
   width: 375px;
   margin-inline: auto;
+
+  main {
+    padding: 12px;
+  }
 `;
 
 const Layout = () => {

@@ -1,6 +1,7 @@
 const defaultTheme = {
   colors: {
     'bg-color': '#17171c',
+    'bg-secondary': '#3c3c47',
     'text-primary': '#e4e4e5',
     'text-secondary': '#9E9EA4',
     'toss-red': '#EE4452',
@@ -17,7 +18,7 @@ const defaultTheme = {
     bold: 'Pretendard-Bold',
   },
   fontSize: {
-    sm: '1rem',
+    sm: '1.2rem',
     md: '1.6rem',
     lg: '2.4rem',
     xl: '3.6rem',

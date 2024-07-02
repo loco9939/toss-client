@@ -53,6 +53,10 @@ const GlobalStyle = createGlobalStyle`
     color: ${props => props.theme.colors['text-primary']};
   }
 
+  a:visited {
+    color: ${props => props.theme.colors['text-primary']};
+  }
+
   :lang(ko) {
     h1, h2, h3 {
       word-break: keep-all;
