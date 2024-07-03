@@ -1,19 +1,25 @@
 import PieChart from '@/components/PieChart';
-import { LatestAsset } from '@/types';
+import styled from 'styled-components';
 
 type MonthAssetProps = {
-  asset?: LatestAsset;
+  asset?: Record<string, number | string>;
 };
+
+const ListItem = styled.li`
+  width: 30%;
+  flex-grow: 1;
+  border: 1px solid yellow;
+`;
 
 const MonthAsset = ({ asset }: MonthAssetProps) => {
   if (!asset) {
     return <p>등록된 자산이 없습니다.</p>;
   }
   return (
-    <div>
+    <ListItem>
       <PieChart data={[]} />
       <p>N월</p>
-    </div>
+    </ListItem>
   );
 };
 

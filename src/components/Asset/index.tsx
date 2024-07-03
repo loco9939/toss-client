@@ -2,6 +2,15 @@ import useFetchYearAssets from '@/hooks/useFetchYearAssets';
 import { useSearchParams } from 'react-router-dom';
 import MonthAsset from './MonthAsset';
 import YearSelect from './YearSelect';
+import styled from 'styled-components';
+
+const List = styled.ul.attrs({
+  role: 'monthList',
+})`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.2rem;
+`;
 
 const Asset = () => {
   const [params] = useSearchParams();
@@ -21,7 +30,11 @@ const Asset = () => {
   return (
     <section>
       <YearSelect year={year} />
-      <MonthAsset />
+      <List>
+        {yearAssets.map(asset => (
+          <MonthAsset key={asset.date} asset={asset} />
+        ))}
+      </List>
     </section>
   );
 };

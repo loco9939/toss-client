@@ -3,13 +3,13 @@ import { render } from '@/utils/test-helpers';
 import { screen } from '@testing-library/dom';
 import MonthAsset from '.';
 
-const { monthAsset } = fixtures;
+const { yearAssets } = fixtures;
 
 const context = describe;
 describe('MonthAsset', () => {
   context('when it received asset props', () => {
     beforeEach(() => {
-      render(<MonthAsset asset={monthAsset} />);
+      render(<MonthAsset asset={yearAssets[0]} />);
     });
 
     it('renders date', () => {

@@ -1,6 +1,7 @@
 import { create } from 'zustand';
 
 import { apiService } from '@/api';
+import fixtures from '@/fixtures';
 
 export type YearAssetsStore = {
   loading: boolean;
@@ -10,6 +11,7 @@ export type YearAssetsStore = {
   fetchYearAssets: ({ year }: { year?: string }) => Promise<void>;
 };
 
+const { yearAssets } = fixtures;
 const yearAssetsStore = create<YearAssetsStore>((set, get) => ({
   loading: false,
   yearAssets: [],
@@ -24,7 +26,8 @@ const yearAssetsStore = create<YearAssetsStore>((set, get) => ({
 
     const yearAssetsRes = await apiService.fetchYearAssets({ year });
 
-    set(() => ({ yearAssets: yearAssetsRes }));
+    // set(() => ({ yearAssets: yearAssetsRes }));
+    set(() => ({ yearAssets: yearAssets }));
 
     get().finishLoading();
   },

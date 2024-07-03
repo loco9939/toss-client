@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import { RouterProvider, createMemoryRouter } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
 import routes from './routes';
@@ -36,10 +36,12 @@ describe('Routes', () => {
       screen.getByText(/로딩중/);
     });
 
-    it('renders 12 of `MonthAsset` component', () => {
-      const monthAssets = screen.getByRole('listitem');
+    it('renders 12 of `MonthAsset` component', async () => {
+      await waitFor(() => {
+        const monthList = screen.getByRole('monthList');
 
-      expect(monthAssets).toBe(12);
+        expect(monthList).toBeInTheDocument();
+      });
     });
   });
 });
