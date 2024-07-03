@@ -20,8 +20,7 @@ export type Asset = {
 };
 
 export type LatestAsset = {
-  asset_id: number;
-  user_id: number;
+  asset_id: string;
   assets: Record<string, number | string>;
   date: string;
 };

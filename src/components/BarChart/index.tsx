@@ -1,4 +1,5 @@
 import defaultTheme from '@/styles/defaultTheme';
+import { BarChartData } from '@/types';
 import convertKRW from '@/utils/convertKRW';
 import { useState } from 'react';
 import {
@@ -13,7 +14,7 @@ import {
 import styled from 'styled-components';
 
 type BarChartProps = {
-  data: { [key: string]: string | number }[];
+  data: BarChartData[];
 };
 
 const Container = styled.div.attrs({

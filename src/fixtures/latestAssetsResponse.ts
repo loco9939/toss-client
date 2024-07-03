@@ -2,8 +2,7 @@ import { LatestAsset } from '@/types';
 
 const latestAssetsResponse: LatestAsset[] = [
   {
-    asset_id: 10,
-    user_id: 1,
+    asset_id: '10',
     assets: {
       dw: 150000,
       saving: 550000,
@@ -14,8 +13,7 @@ const latestAssetsResponse: LatestAsset[] = [
     date: '2024-06-01',
   },
   {
-    asset_id: 9,
-    user_id: 1,
+    asset_id: '9',
     assets: {
       dw: 140000,
       saving: 540000,
@@ -26,8 +24,7 @@ const latestAssetsResponse: LatestAsset[] = [
     date: '2024-05-01',
   },
   {
-    asset_id: 8,
-    user_id: 1,
+    asset_id: '8',
     assets: {
       dw: 120000,
       saving: 520000,
@@ -38,8 +35,7 @@ const latestAssetsResponse: LatestAsset[] = [
     date: '2024-04-01',
   },
   {
-    asset_id: 7,
-    user_id: 1,
+    asset_id: '7',
     assets: {
       dw: 110000,
       saving: 530000,
@@ -50,8 +46,7 @@ const latestAssetsResponse: LatestAsset[] = [
     date: '2024-03-01',
   },
   {
-    asset_id: 6,
-    user_id: 1,
+    asset_id: '6',
     assets: {
       dw: 100000,
       saving: 500000,
@@ -62,8 +57,7 @@ const latestAssetsResponse: LatestAsset[] = [
     date: '2024-02-01',
   },
   {
-    asset_id: 5,
-    user_id: 1,
+    asset_id: '5',
     assets: {
       dw: 90000,
       saving: 490000,
