@@ -10,9 +10,9 @@ const Container = styled.div.attrs({
   role: 'summary-bar-chart',
 })`
   display: flex;
-  gap: 2px;
-  height: 28px;
-  border-radius: 12px;
+  gap: 0.2rem;
+  height: 2.8rem;
+  border-radius: 1.2rem;
   overflow: hidden;
 `;
 

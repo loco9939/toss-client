@@ -12,8 +12,8 @@ type AssetListProps = {
 const List = styled.ul`
   display: flex;
   flex-direction: column;
-  gap: 16px;
-  margin-top: 24px;
+  gap: 1.6rem;
+  margin-top: 2.4rem;
 `;
 
 const AssetList = ({ assetList, prevAsset }: AssetListProps) => {

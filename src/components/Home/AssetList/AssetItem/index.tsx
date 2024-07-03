@@ -12,15 +12,15 @@ type AssetItemProps = {
 
 const ListItem = styled.li`
   display: flex;
-  gap: 21px;
+  gap: 2.1rem;
   justify-content: space-between;
 
-  padding: 8px 0;
+  padding: 0.8rem 0;
 `;
 
 const Icon = styled.img`
-  width: 35px;
-  height: 35px;
+  width: 3.5rem;
+  height: 3.5rem;
   border-radius: 50%;
   background-color: gray;
 `;
@@ -32,7 +32,7 @@ const TextBoxWrapper = styled.div`
 const TextFirRow = styled.div`
   display: flex;
   justify-content: space-between;
-  margin-bottom: 8px;
+  margin-bottom: 0.8rem;
 `;
 
 const TextSecRow = styled.div`

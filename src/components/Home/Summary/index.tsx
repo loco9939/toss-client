@@ -13,8 +13,8 @@ const Title = styled.h2`
 `;
 
 const Price = styled.p`
-  margin-top: 12px;
-  margin-bottom: 24px;
+  margin-top: 1.2rem;
+  margin-bottom: 2.4rem;
   font-size: ${props => props.theme.fontSize.lg};
 `;
 

@@ -1,5 +1,6 @@
 import BarChart from '@/components/BarChart';
 import convertAssetResponse from '@/utils/convertAssetResponse';
+import convertBarChartData from '@/utils/convertBarChartData';
 import convertPrice from '@/utils/convertPrice';
 import getTotalAssets from '@/utils/getTotalAsset';
 import styled from 'styled-components';
@@ -9,8 +10,8 @@ type MonthlyChartProps = {
 };
 
 const Container = styled.div`
-  margin-top: 24px;
-  padding-block: 12px;
+  margin-top: 2.4rem;
+  padding-block: 1.2rem;
 `;
 
 const Summary = styled.div`
@@ -39,8 +40,7 @@ const MonthlyChart = ({ latestAssets }: MonthlyChartProps) => {
   const isPositiveInt = comparisonPrice > 0;
   const priceStr = convertPrice(comparisonPrice);
 
-  // [{dw:13,saving:14}, ...]
-  // [{name:'1월', amount:13+14}]
+  const barChartData = convertBarChartData(latestAssets);
   return (
     <Container>
       <Summary>
@@ -53,7 +53,7 @@ const MonthlyChart = ({ latestAssets }: MonthlyChartProps) => {
         </TextBox>
         <Emoji>😀</Emoji>
       </Summary>
-      <BarChart data={[]} />
+      <BarChart data={barChartData} />
     </Container>
   );
 };

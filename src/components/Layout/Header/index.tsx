@@ -2,10 +2,11 @@ import Icons_menu from '@/assets/Icon_menu.svg?react';
 import styled from 'styled-components';
 
 const StyledHeader = styled.header`
+  position: relative;
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  padding: 16px 12px;
+  padding: 1.6rem 1.2rem;
 `;
 
 const Title = styled.h1`

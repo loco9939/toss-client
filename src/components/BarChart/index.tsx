@@ -6,7 +6,6 @@ import {
   Cell,
   LabelList,
   BarChart as OriginBarChart,
-  Rectangle,
   ResponsiveContainer,
   Tooltip,
   XAxis,
@@ -22,8 +21,8 @@ const Container = styled.div.attrs({
 })`
   position: relative;
   width: 100%;
-  height: 225px;
-  margin-top: 48px;
+  height: 22.5rem;
+  margin-block: 4.8rem;
 
   .recharts-label-list {
     font-weight: ${props => props.theme.font.light};
@@ -33,7 +32,7 @@ const Container = styled.div.attrs({
 
 const Legend = styled.div`
   position: absolute;
-  bottom: -32px;
+  bottom: -3.2rem;
   color: ${props => props.theme.colors['text-secondary']};
 `;
 
@@ -82,13 +81,7 @@ const BarChart = ({ data }: BarChartProps) => {
           margin={{ top: 20 }}
         >
           <Tooltip active={false} />
-          <Bar
-            dataKey='amount'
-            radius={[8, 8, 0, 0]}
-            activeBar={
-              <Rectangle fill={defaultTheme.colors['toss-lightblue']} />
-            }
-          >
+          <Bar dataKey='amount' radius={[8, 8, 0, 0]}>
             <LabelList
               dataKey='amount'
               position='top'
@@ -119,16 +112,6 @@ const BarChart = ({ data }: BarChartProps) => {
             style={{ fill: defaultTheme.colors['text-secondary'] }}
             tick={renderCustomAxisTick}
           />
-          {/* <Legend
-            align='left'
-            payload={[{ value: '만원 단위' }]}
-            wrapperStyle={{
-              position: 'absolute',
-              bottom: '-12px',
-              left: '-16px',
-              color: defaultTheme.colors['text-secondary'],
-            }}
-          /> */}
         </OriginBarChart>
       </ResponsiveContainer>
       <Legend>만원 단위</Legend>
