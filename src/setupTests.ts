@@ -9,3 +9,5 @@ afterAll(() => server.close());
 afterEach(() => server.resetHandlers());
 
 vi.mock('zustand'); // to make it work like Jest (auto-mocking)
+
+vi.mock('recharts');

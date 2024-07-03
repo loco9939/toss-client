@@ -53,6 +53,13 @@ const GlobalStyle = createGlobalStyle`
     color: ${props => props.theme.colors['text-primary']};
   }
 
+  button {
+    padding:0;
+    cursor: pointer;
+    user-select: none;
+    font-family: ${props => props.theme.font.medium};
+  }
+
   a:visited {
     color: ${props => props.theme.colors['text-primary']};
   }
