@@ -7,10 +7,23 @@ import defaultTheme from './styles/defaultTheme';
 const context = describe;
 describe('Routes', () => {
   context('when the current path is "/"', () => {
-    it('renders `Header` Toss', () => {
+    beforeEach(() => {
       renderRouter('/');
+    });
 
+    it('renders `Header` Toss and Home Component', () => {
       screen.getByRole('heading', { name: 'Toss' });
+    });
+
+    it('renders Home Component', () => {
+      screen.getByText(/로딩중/);
+    });
+  });
+
+  context('when the current path is "/signin-complete"', () => {
+    it('renders `자산 등록 하러 가기` button', () => {
+      renderRouter('/signin-complete');
+      screen.getByRole('button', { name: '자산 등록 하러 가기' });
     });
   });
 });

@@ -1,5 +1,6 @@
 import HomePage from './page/HomePage';
 import Layout from './page/Layout';
+import SigninCompletePage from './page/SigninCompletePage';
 
 const routes = [
   {
@@ -8,6 +9,10 @@ const routes = [
       {
         path: '/',
         element: <HomePage />,
+      },
+      {
+        path: '/signin-complete',
+        element: <SigninCompletePage />,
       },
     ],
   },
