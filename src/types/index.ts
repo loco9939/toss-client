@@ -26,6 +26,11 @@ export type LatestAsset = {
   date: string;
 };
 
+export type BarChartData = {
+  name: string;
+  amount: number;
+};
+
 export const ASSET_DISPLAY: { [key: string]: string } = {
   dw: '입출금',
   saving: '저축',
