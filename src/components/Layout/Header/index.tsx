@@ -20,9 +20,6 @@ const HamburgerBtn = styled.button.attrs({
   role: 'menu',
 })`
   cursor: pointer;
-  svg {
-    fill: white;
-  }
 `;
 
 const Header = () => {

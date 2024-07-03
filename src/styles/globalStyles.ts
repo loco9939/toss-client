@@ -54,7 +54,7 @@ const GlobalStyle = createGlobalStyle`
   }
 
   button {
-    padding:0;
+    all: unset;
     cursor: pointer;
     user-select: none;
     font-family: ${props => props.theme.font.medium};
@@ -62,6 +62,10 @@ const GlobalStyle = createGlobalStyle`
 
   a:visited {
     color: ${props => props.theme.colors['text-primary']};
+  }
+
+  svg {
+    fill: ${props => props.theme.colors['text-primary']};
   }
 
   :lang(ko) {
