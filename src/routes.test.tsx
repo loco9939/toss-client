@@ -26,6 +26,22 @@ describe('Routes', () => {
       screen.getByRole('button', { name: '자산 등록 하러 가기' });
     });
   });
+
+  context('when the current path is "/assets"', () => {
+    beforeEach(() => {
+      renderRouter('/assets');
+    });
+
+    it('renders `YearSelct` component', async () => {
+      screen.getByText(/로딩중/);
+    });
+
+    it('renders 12 of `MonthAsset` component', () => {
+      const monthAssets = screen.getByRole('listitem');
+
+      expect(monthAssets).toBe(12);
+    });
+  });
 });
 
 function renderRouter(path: string) {
