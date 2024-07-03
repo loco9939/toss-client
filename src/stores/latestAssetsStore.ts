@@ -1,9 +1,6 @@
-import axios from 'axios';
 import { create } from 'zustand';
 
-import { API_BASE_URL } from '@/api';
-
-import { LatestAsset } from '@/types';
+import { apiService } from '@/api';
 
 export type LatestAssetsStore = {
   loading: boolean;
@@ -24,17 +21,12 @@ const latestAssetsStore = create<LatestAssetsStore>((set, get) => ({
   },
   fetchLatestAssets: async () => {
     get().startLoading();
-    try {
-      const { data } = await axios.get<LatestAsset[]>(
-        `${API_BASE_URL}/assets/latest`,
-      );
-      const latestAssetsRes = data.map(d => ({ ...d.assets, date: d.date }));
-      set(() => ({ latestAssets: latestAssetsRes }));
-    } catch (error) {
-      new Error(`${error}`);
-    } finally {
-      get().finishLoading();
-    }
+
+    const latestAssetsRes = await apiService.fetchLatestAssets();
+
+    set(() => ({ latestAssets: latestAssetsRes }));
+
+    get().finishLoading();
   },
 }));
 
