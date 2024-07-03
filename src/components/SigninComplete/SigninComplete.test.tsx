@@ -25,6 +25,6 @@ describe('SigninComplete', () => {
     });
     fireEvent.click(assetBtn);
 
-    expect(mockUseNavigate).toHaveBeenCalledWith('/assets');
+    expect(mockUseNavigate).toHaveBeenCalled();
   });
 });

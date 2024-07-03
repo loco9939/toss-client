@@ -25,6 +25,7 @@ const latestAssetsStore = create<LatestAssetsStore>((set, get) => ({
     const latestAssetsRes = await apiService.fetchLatestAssets();
 
     set(() => ({ latestAssets: latestAssetsRes }));
+    // set(() => ({ latestAssets: latestAssets }));
 
     get().finishLoading();
   },

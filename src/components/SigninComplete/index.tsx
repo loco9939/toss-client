@@ -1,3 +1,4 @@
+import dayjs from 'dayjs';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
@@ -31,13 +32,17 @@ const Button = styled.button.attrs({
 
 const SigninComplete = () => {
   const navigate = useNavigate();
+  const year = dayjs().get('year');
+
   return (
     <Container>
       <Icon>🥹</Icon>
       <Text>__님 환영합니다 🎉</Text>
       <Text>자산을 등록해주세요!</Text>
 
-      <Button onClick={() => navigate('/assets')}>자산 등록 하러 가기</Button>
+      <Button onClick={() => navigate(`/assets?year=${year}`)}>
+        자산 등록 하러 가기
+      </Button>
     </Container>
   );
 };

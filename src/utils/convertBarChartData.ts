@@ -2,13 +2,12 @@ const convertBarChartData = (
   latestAssets: Record<string, string | number>[],
 ) => {
   // 1. date를 name(month)으로 변환한다.
-  const convertNameAssets: Record<string, string | number>[] = latestAssets.map(
-    asset => {
+  const convertNameAssets: { name: string; [key: string]: string | number }[] =
+    latestAssets.map(asset => {
       const { date, ...rest } = asset;
       const month = Number(`${date}`.split('-')[1]);
       return { name: `${month}월`, ...rest };
-    },
-  );
+    });
 
   // 2. name을 제외한 자산을 모두 더해 amount에 할당
   const sumAssets = convertNameAssets.map(asset => {
@@ -16,7 +15,7 @@ const convertBarChartData = (
     const totalAssets = Object.values(rest).reduce(
       (acc, cur) => Number(acc) + Number(cur),
       0,
-    );
+    ) as number;
     return { name, amount: totalAssets };
   });
 
