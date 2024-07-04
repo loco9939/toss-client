@@ -1,3 +1,4 @@
+import AssetEditPage from './page/AssetEditPage';
 import AssetPage from './page/AssetPage';
 import HomePage from './page/HomePage';
 import Layout from './page/Layout';
@@ -18,6 +19,10 @@ const routes = [
       {
         path: '/assets',
         element: <AssetPage />,
+      },
+      {
+        path: '/assets:year:month',
+        element: <AssetEditPage />,
       },
     ],
   },

@@ -33,7 +33,10 @@ describe('Routes', () => {
     });
 
     it('renders `YearSelct` component', async () => {
-      screen.getByText(/로딩중/);
+      await waitFor(() => {
+        screen.getByRole('prev');
+        screen.getByRole('next');
+      });
     });
 
     it('renders 12 of `MonthAsset` component', async () => {
@@ -41,6 +44,15 @@ describe('Routes', () => {
         const monthList = screen.getByRole('monthList');
 
         expect(monthList).toBeInTheDocument();
+      });
+    });
+  });
+
+  context('when the current path is "/assets:year:month"', () => {
+    it('renders `YearSelct` component', async () => {
+      await waitFor(() => {
+        screen.getByRole('prev');
+        screen.getByRole('next');
       });
     });
   });
