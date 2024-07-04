@@ -19,9 +19,10 @@ export type Asset = {
   price: number;
 };
 
+// date로 어떤 날짜의 데이터인지 판단 가능
 export type LatestAsset = {
   asset_id: string;
-  assets: Record<string, number | string>;
+  assets: Record<string, number | string | undefined>;
   date: string;
 };
 

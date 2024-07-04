@@ -5,7 +5,7 @@ import fixtures from '@/fixtures';
 
 export type YearAssetsStore = {
   loading: boolean;
-  yearAssets: Record<string, number | string>[];
+  yearAssets: Record<string, number | string | undefined>[];
   startLoading: () => void;
   finishLoading: () => void;
   fetchYearAssets: ({ year }: { year?: string }) => Promise<void>;

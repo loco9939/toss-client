@@ -30,6 +30,7 @@ class ApiService {
         },
       );
 
+      // BE 데이터 변형해주는 곳
       const yearAssetsRes = data.map(d => ({ ...d.assets, date: d.date }));
       return yearAssetsRes;
     } catch (error) {

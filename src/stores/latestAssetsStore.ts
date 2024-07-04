@@ -4,7 +4,7 @@ import { apiService } from '@/api';
 
 export type LatestAssetsStore = {
   loading: boolean;
-  latestAssets: Record<string, number | string>[];
+  latestAssets: Record<string, number | string | undefined>[];
   startLoading: () => void;
   finishLoading: () => void;
   fetchLatestAssets: () => Promise<void>;

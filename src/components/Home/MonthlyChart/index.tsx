@@ -6,7 +6,7 @@ import getTotalAssets from '@/utils/getTotalAsset';
 import styled from 'styled-components';
 
 type MonthlyChartProps = {
-  latestAssets: Record<string, number | string>[];
+  latestAssets: Record<string, number | string | undefined>[];
 };
 
 const Container = styled.div`

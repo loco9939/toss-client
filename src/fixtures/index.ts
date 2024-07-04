@@ -1,3 +1,4 @@
+import pieChartData from './PieChartData';
 import assetList from './assetList';
 import assetResponse from './assetResponse';
 import assets from './assets';
@@ -18,6 +19,7 @@ const fixtures = {
   latestAssetsResponse,
   monthAsset,
   yearAssets,
+  pieChartData,
 };
 
 export default fixtures;

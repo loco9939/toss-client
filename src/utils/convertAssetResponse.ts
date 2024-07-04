@@ -1,7 +1,7 @@
 import { Asset } from '@/types';
 
 const convertAssetResponse = (
-  asset: Record<string, number | string>,
+  asset: Record<string, number | string | undefined>,
 ): Asset[] => {
   const assetList: Asset[] = [];
 

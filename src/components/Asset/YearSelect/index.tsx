@@ -7,11 +7,11 @@ type YearSelectProps = {
 
 const Container = styled.div`
   display: flex;
-  gap: 10px;
-  padding: 12px;
+  gap: 1rem;
+  padding: 1.2rem;
   align-items: center;
   justify-content: center;
-  border: 1px solid yellow;
+  margin-bottom: 2.4rem;
 `;
 
 const ChevronRightBtn = styled(ChevronLeftBtn)`

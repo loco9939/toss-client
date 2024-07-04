@@ -1,15 +1,17 @@
 import useFetchYearAssets from '@/hooks/useFetchYearAssets';
 import { useSearchParams } from 'react-router-dom';
+import styled from 'styled-components';
+import Legend from './Legend';
 import MonthAsset from './MonthAsset';
 import YearSelect from './YearSelect';
-import styled from 'styled-components';
 
 const List = styled.ul.attrs({
   role: 'monthList',
 })`
   display: flex;
   flex-wrap: wrap;
-  gap: 1.2rem;
+  gap: 1.6rem;
+  margin-block: 2.4rem;
 `;
 
 const Asset = () => {
@@ -30,6 +32,7 @@ const Asset = () => {
   return (
     <section>
       <YearSelect year={year} />
+      <Legend />
       <List>
         {yearAssets.map(asset => (
           <MonthAsset key={asset.date} asset={asset} />

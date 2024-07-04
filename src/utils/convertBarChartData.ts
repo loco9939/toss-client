@@ -1,5 +1,5 @@
 const convertBarChartData = (
-  latestAssets: Record<string, string | number>[],
+  latestAssets: Record<string, string | number | undefined>[],
 ) => {
   // 1. date를 name(month)으로 변환한다.
   const convertNameAssets: { name: string; [key: string]: string | number }[] =

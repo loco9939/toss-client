@@ -1,4 +1,4 @@
-const yearAssets: Record<string, string | number>[] = [
+const yearAssets: Record<string, string | number | undefined>[] = [
   {
     dw: 100000,
     saving: 150000,
@@ -86,6 +86,9 @@ const yearAssets: Record<string, string | number>[] = [
     pension: 400000,
     debt: 400000,
     date: '2024-11-01',
+  },
+  {
+    date: '2024-12-01',
   },
 ];
 
