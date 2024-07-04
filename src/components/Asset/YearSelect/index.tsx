@@ -1,4 +1,5 @@
 import { ChevronLeftBtn } from '@/components/UI';
+import { useSearchParams } from 'react-router-dom';
 import styled from 'styled-components';
 
 type YearSelectProps = {
@@ -27,11 +28,21 @@ const Year = styled.span.attrs({
 `;
 
 const YearSelect = ({ year }: YearSelectProps) => {
+  const [, setParams] = useSearchParams();
+
+  const onClickPrev = () => {
+    setParams(`year=${Number(year) - 1}`);
+  };
+
+  const onClickNext = () => {
+    setParams(`year=${Number(year) + 1}`);
+  };
+
   return (
     <Container>
-      <ChevronLeftBtn role='prev' />
+      <ChevronLeftBtn role='prev' onClick={onClickPrev} />
       <Year>{year}</Year>
-      <ChevronRightBtn role='next' />
+      <ChevronRightBtn role='next' onClick={onClickNext} />
     </Container>
   );
 };

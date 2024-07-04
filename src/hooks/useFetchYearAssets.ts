@@ -6,7 +6,7 @@ export default function useFetchYearAssets({ year }: { year?: string }) {
 
   useEffect(() => {
     fetchYearAssets({ year });
-  }, []);
+  }, [year]);
 
   return { loading, yearAssets };
 }
