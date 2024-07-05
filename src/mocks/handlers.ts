@@ -34,7 +34,7 @@ export const mockGetLatestAssets = (type?: 'Error') => {
 };
 
 export const mockGetYearAssets = (type?: 'Error') => {
-  return http.get(`${API_BASE_URL}/assets/yearly:year`, () => {
+  return http.get(`${API_BASE_URL}/assets/yearly`, () => {
     if (type === 'Error') {
       return new HttpResponse(null, { status: 404 });
     }
@@ -43,8 +43,19 @@ export const mockGetYearAssets = (type?: 'Error') => {
   });
 };
 
+export const mockGetMonthAsset = (type?: 'Error') => {
+  return http.get(`${API_BASE_URL}/assets/monthly`, () => {
+    if (type === 'Error') {
+      return new HttpResponse(null, { status: 404 });
+    }
+
+    return HttpResponse.json(latestAssetsResponse[0]);
+  });
+};
+
 export const handlers = [
   mockGetAssetResponse(),
   mockGetLatestAssets(),
   mockGetYearAssets(),
+  mockGetMonthAsset(),
 ];

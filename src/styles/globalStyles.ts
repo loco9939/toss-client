@@ -54,7 +54,7 @@ const GlobalStyle = createGlobalStyle`
   }
 
   button {
-    all: unset;
+    padding:0;
     cursor: pointer;
     user-select: none;
     font-family: ${props => props.theme.font.medium};

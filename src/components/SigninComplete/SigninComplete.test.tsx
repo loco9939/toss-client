@@ -19,7 +19,7 @@ describe('SigninComplete', () => {
     screen.getByRole('button', { name: '자산 등록 하러 가기' });
   });
 
-  it('when click `자산 등록 하러 가기 ` button, useNavigate call', async () => {
+  it('when click `자산 등록 하러 가기 ` button, useNavigate call', () => {
     const assetBtn = screen.getByRole('button', {
       name: '자산 등록 하러 가기',
     });

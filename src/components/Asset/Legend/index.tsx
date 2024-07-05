@@ -4,6 +4,7 @@ const List = styled.ul`
   width: 55%;
   display: flex;
   justify-content: center;
+  margin-top: 2.4rem;
   margin-inline: auto;
   gap: 1.6rem;
   padding-bottom: 0.6rem;
@@ -45,7 +46,7 @@ const Item = styled.li`
 
 const Legend = () => {
   return (
-    <List>
+    <List role='legend'>
       <Item>
         <Icon type='dw' />
         <p>입출금</p>

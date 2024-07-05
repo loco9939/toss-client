@@ -6,7 +6,7 @@ import MonthAsset from './MonthAsset';
 import YearSelect from './YearSelect';
 
 const List = styled.ul.attrs({
-  role: 'monthList',
+  role: 'year-asset-list',
 })`
   display: flex;
   flex-wrap: wrap;
@@ -31,11 +31,11 @@ const Asset = () => {
 
   return (
     <section>
-      <YearSelect year={year} />
+      <YearSelect year={Number(year ?? 0)} />
       <Legend />
       <List>
         {yearAssets.map(asset => (
-          <MonthAsset key={asset.date} asset={asset} />
+          <MonthAsset key={asset.date} year={year} asset={asset} />
         ))}
       </List>
     </section>

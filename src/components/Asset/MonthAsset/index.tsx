@@ -1,8 +1,10 @@
 import PieChart from '@/components/PieChart';
 import convertPieChartData from '@/utils/convertPieChartData';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
 type MonthAssetProps = {
+  year?: string;
   asset?: Record<string, number | string | undefined>;
 };
 
@@ -23,6 +25,10 @@ const ListItem = styled.li`
   &:hover {
     opacity: 1;
   }
+
+  svg {
+    cursor: pointer;
+  }
 `;
 
 const Text = styled.p`
@@ -39,12 +45,28 @@ const NoAssetItem = styled(ListItem)`
   }
 `;
 
-const MonthAsset = ({ asset }: MonthAssetProps) => {
+const PieChartContainer = styled.div`
+  width: 8.4rem;
+  height: 8.2rem;
+  margin-inline: auto;
+
+  * {
+    outline: none;
+  }
+`;
+
+const MonthAsset = ({ year, asset }: MonthAssetProps) => {
+  const navigate = useNavigate();
   const month = Number(`${asset?.date}`.split('-')[1]);
+
+  // TODO: monthAsset 클릭 시 asset-detail 이동 로직 구현하기
+  const handleClickItem = () => {
+    navigate(`/asset-detail?year=${year}&month=${month}`);
+  };
 
   if (!asset?.dw) {
     return (
-      <NoAssetItem>
+      <NoAssetItem onClick={handleClickItem}>
         <p>자산 등록</p>
         <p>{month}월</p>
       </NoAssetItem>
@@ -54,8 +76,15 @@ const MonthAsset = ({ asset }: MonthAssetProps) => {
   const pieChartData = convertPieChartData(asset);
 
   return (
-    <ListItem>
-      <PieChart data={pieChartData} />
+    <ListItem onClick={handleClickItem}>
+      <PieChartContainer>
+        <PieChart
+          data={pieChartData}
+          innerRadius={25}
+          outerRadius={40}
+          paddingAngle={5}
+        />
+      </PieChartContainer>
       <Text>{month}월</Text>
     </ListItem>
   );

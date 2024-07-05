@@ -1,7 +1,15 @@
 import fixtures from '@/fixtures';
 import { render } from '@/utils/test-helpers';
-import { screen } from '@testing-library/dom';
+import { fireEvent, screen } from '@testing-library/dom';
 import MonthAsset from '.';
+
+const mockUseNavigate = vi.fn();
+
+// mocking
+vi.mock('react-router-dom', async () => ({
+  ...(await vi.importActual('react-router-dom')),
+  useNavigate: () => mockUseNavigate,
+}));
 
 const { yearAssets } = fixtures;
 
@@ -22,8 +30,22 @@ describe('MonthAsset', () => {
       render(<MonthAsset />);
     });
 
-    it('renders "등록된 자산이 없습니다."', () => {
-      expect(screen.getByText(/없습니다./));
+    it('renders "자산 등록"', () => {
+      screen.getByText(/자산 등록/);
+    });
+  });
+
+  context('when click item', () => {
+    beforeEach(() => {
+      render(<MonthAsset />);
+    });
+
+    it('calls useNavigate', () => {
+      const item = screen.getByRole('listitem');
+
+      fireEvent.click(item);
+
+      expect(mockUseNavigate).toHaveBeenCalled();
     });
   });
 });

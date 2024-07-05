@@ -2,9 +2,9 @@ import { ChevronLeftBtn } from '@/components/UI';
 import { useSearchParams } from 'react-router-dom';
 import styled from 'styled-components';
 
-type YearSelectProps = {
+type MonthSelectProps = {
   year: number;
-  month?: number;
+  month: number;
 };
 
 const Container = styled.div`
@@ -13,6 +13,7 @@ const Container = styled.div`
   padding: 1.2rem;
   align-items: center;
   justify-content: center;
+  margin-bottom: 2.4rem;
 `;
 
 const ChevronRightBtn = styled(ChevronLeftBtn)`
@@ -21,38 +22,38 @@ const ChevronRightBtn = styled(ChevronLeftBtn)`
   }
 `;
 
-const Year = styled.span.attrs({
-  role: 'year',
+const Month = styled.span.attrs({
+  role: 'month',
 })`
   font-size: ${props => props.theme.fontSize.lg};
 `;
 
-const YearSelect = ({ year, month }: YearSelectProps) => {
+const MonthSelect = ({ year, month }: MonthSelectProps) => {
   const [, setParams] = useSearchParams();
 
   const onClickPrev = () => {
-    if (month) {
-      setParams(`year=${year - 1}&month=${month}`);
-    } else {
-      setParams(`year=${year - 1}`);
+    if (month < 2) {
+      year = year - 1;
+      month = 13;
     }
+    setParams(`year=${year}&month=${month - 1}`);
   };
 
   const onClickNext = () => {
-    if (month) {
-      setParams(`year=${year + 1}&month=${month}`);
-    } else {
-      setParams(`year=${year + 1}`);
+    if (month > 11) {
+      year = year + 1;
+      month = 0;
     }
+    setParams(`year=${year}&month=${month + 1}`);
   };
 
   return (
     <Container>
       <ChevronLeftBtn role='prev' onClick={onClickPrev} />
-      <Year>{year}</Year>
+      <Month>{month}</Month>
       <ChevronRightBtn role='next' onClick={onClickNext} />
     </Container>
   );
 };
 
-export default YearSelect;
+export default MonthSelect;

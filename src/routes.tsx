@@ -21,7 +21,7 @@ const routes = [
         element: <AssetPage />,
       },
       {
-        path: '/assets:year:month',
+        path: '/asset-detail',
         element: <AssetEditPage />,
       },
     ],

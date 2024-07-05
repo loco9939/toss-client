@@ -41,18 +41,19 @@ describe('Routes', () => {
 
     it('renders 12 of `MonthAsset` component', async () => {
       await waitFor(() => {
-        const monthList = screen.getByRole('monthList');
+        const monthList = screen.getByRole('year-asset-list');
 
         expect(monthList).toBeInTheDocument();
       });
     });
   });
 
-  context('when the current path is "/assets:year:month"', () => {
-    it('renders `YearSelct` component', async () => {
+  context('when the current path is "/asset-detail"', () => {
+    it('renders `YearSelect`, `MonthSelect` component', async () => {
+      renderRouter('/asset-detail');
       await waitFor(() => {
-        screen.getByRole('prev');
-        screen.getByRole('next');
+        screen.getByRole('year');
+        screen.getByRole('month');
       });
     });
   });

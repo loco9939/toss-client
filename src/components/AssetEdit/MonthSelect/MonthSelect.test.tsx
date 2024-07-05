@@ -1,14 +1,14 @@
 import { render } from '@/utils/test-helpers';
 import { screen } from '@testing-library/dom';
-import YearSelect from '.';
+import MonthSelect from '.';
 
-describe('YearSelect', () => {
+describe('MonthSelect', () => {
   beforeEach(() => {
-    render(<YearSelect year={2024} />);
+    render(<MonthSelect year={2024} month={12} />);
   });
 
-  it('renders year', () => {
-    expect(screen.getByRole('year')).toBeInTheDocument();
+  it('renders month', () => {
+    expect(screen.getByRole('month')).toBeInTheDocument();
   });
 
   it('renders next,prev button', () => {
