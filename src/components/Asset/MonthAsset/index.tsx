@@ -19,7 +19,7 @@ const ListItem = styled.li`
   background-color: ${props => props.theme.colors['bg-secondary']};
   cursor: pointer;
   user-select: none;
-  box-shadow: rgba(149, 157, 165, 0.2) 0px 4px 24px;
+  box-shadow: rgba(255, 255, 255, 0.1) -4px 9px 25px -6px;
   opacity: 0.8;
 
   &:hover {

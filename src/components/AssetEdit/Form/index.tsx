@@ -1,7 +1,8 @@
 import { UpdateMonthAssetProps } from '@/api';
 import convertKRW from '@/utils/convertKRW';
 import handleNumericChange from '@/utils/handleNumericChange';
-import { useState } from 'react';
+import { FormEventHandler, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
 type FormProps = {
@@ -48,6 +49,7 @@ const Legend = styled.p`
 `;
 
 const Form = ({ year, month, data, handler, updateMonthAsset }: FormProps) => {
+  const navigate = useNavigate();
   const { dw, saving, investment, pension, debt } = data;
   const {
     changeDw,
@@ -73,12 +75,17 @@ const Form = ({ year, month, data, handler, updateMonthAsset }: FormProps) => {
     setInputFocus({ ...inputFocus, [field]: true });
   };
 
-  const handleSubmit = () => {
+  const handleSubmit: FormEventHandler<HTMLFormElement> = event => {
+    event.preventDefault();
     updateMonthAsset({
       year: String(year),
       month: String(month),
       asset: { dw, saving, investment, pension, debt },
     });
+
+    alert('자산이 등록되었습니다.');
+
+    navigate(`/assets?year=${year}`);
   };
 
   return (

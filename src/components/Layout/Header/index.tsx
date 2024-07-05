@@ -1,34 +1,42 @@
-import Icons_menu from '@/assets/Icon_menu.svg?react';
+import { ChevronLeftBtn } from '@/components/UI';
+import { useEffect, useState } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
+import Gnb from '../Gnb';
 
 const StyledHeader = styled.header`
   position: relative;
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
   align-items: center;
   padding: 1.6rem 1.2rem;
 `;
 
-const Title = styled.h1`
+const Logo = styled.h1`
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
+  cursor: pointer;
+  user-select: none;
   font-size: ${props => props.theme.fontSize.lg};
 `;
 
-const HamburgerBtn = styled.button.attrs({
-  role: 'menu',
-})`
-  cursor: pointer;
-`;
-
 const Header = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
+  const [isHomePage, setIsHomePage] = useState(location.pathname === '/');
+
+  useEffect(() => {
+    setIsHomePage(location.pathname === '/');
+  }, [location.pathname]);
+
+  const goBack = () => navigate(-1);
+  const goHome = () => navigate('/');
   return (
     <StyledHeader>
-      <Title>Toss</Title>
-      <HamburgerBtn>
-        <Icons_menu />
-      </HamburgerBtn>
+      {isHomePage ? <div /> : <ChevronLeftBtn role='back' onClick={goBack} />}
+      <Logo onClick={goHome}>Toss</Logo>
+      <Gnb />
     </StyledHeader>
   );
 };

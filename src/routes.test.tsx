@@ -59,7 +59,7 @@ describe('Routes', () => {
   });
 });
 
-function renderRouter(path: string) {
+export function renderRouter(path: string) {
   const router = createMemoryRouter(routes, { initialEntries: [path] });
   render(
     <ThemeProvider theme={defaultTheme}>
