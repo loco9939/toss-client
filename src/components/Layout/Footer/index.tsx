@@ -3,7 +3,12 @@ import styled from 'styled-components';
 const Container = styled.footer`
   font-size: ${props => props.theme.fontSize.sm};
   padding: 1.2rem;
+  color: ${props => props.theme.colors['text-secondary']};
   background-color: ${props => props.theme.colors['bg-secondary']};
+
+  a:visited {
+    color: ${props => props.theme.colors['toss-blue']};
+  }
 `;
 
 const SocialMedia = styled.div`

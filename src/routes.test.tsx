@@ -57,6 +57,15 @@ describe('Routes', () => {
       });
     });
   });
+
+  context('when the current path is "/landing"', () => {
+    it('renders "로그인", "나만의 자산관리""', () => {
+      renderRouter('/landing');
+
+      screen.getByText(/로그인/);
+      screen.getByText(/나만의 자산관리/);
+    });
+  });
 });
 
 export function renderRouter(path: string) {

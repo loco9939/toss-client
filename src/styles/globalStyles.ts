@@ -60,10 +60,6 @@ const GlobalStyle = createGlobalStyle`
     font-family: ${props => props.theme.font.medium};
   }
 
-  a:visited {
-    color: ${props => props.theme.colors['text-primary']};
-  }
-
   svg {
     fill: ${props => props.theme.colors['text-primary']};
   }

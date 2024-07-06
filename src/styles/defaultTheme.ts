@@ -10,6 +10,8 @@ const defaultTheme = {
     'toss-pink': '#F66570',
     'toss-lightblue': '#4593FC',
     'toss-green': '#15C47E',
+    'gray-opacity-100': 'rgba(2,32,71,0.05)',
+    'gray-700': '#4e5968',
   },
   font: {
     light: 'Pretendard-Light',
