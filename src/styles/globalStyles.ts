@@ -1,3 +1,4 @@
+import 'aos/dist/aos.css';
 import { createGlobalStyle } from 'styled-components';
 
 const GlobalStyle = createGlobalStyle`
