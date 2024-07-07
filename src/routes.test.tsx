@@ -5,6 +5,23 @@ import routes from './routes';
 import defaultTheme from './styles/defaultTheme';
 
 const context = describe;
+vi.mock('@supabase/supabase-js', () => {
+  return {
+    createClient: vi.fn(() => {
+      return {
+        auth: {
+          signIn: vi.fn(),
+          signOut: vi.fn(),
+          getSession: vi.fn().mockResolvedValue({ data: { session: '' } }),
+          onAuthStateChange: vi.fn().mockReturnValue({
+            data: { subscription: { unsubscribe: vi.fn() } },
+          }),
+        },
+      };
+    }),
+  };
+});
+
 describe('Routes', () => {
   context('when the current path is "/"', () => {
     beforeEach(() => {
@@ -64,6 +81,14 @@ describe('Routes', () => {
 
       screen.getByText(/로그인/);
       screen.getByText(/나만의 자산관리/);
+    });
+  });
+
+  context('when the current path is "/signin"', () => {
+    it('renders 카카오톡', () => {
+      renderRouter('/signin');
+
+      screen.getByRole('login');
     });
   });
 });

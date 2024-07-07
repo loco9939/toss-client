@@ -4,6 +4,7 @@ import HomePage from './page/HomePage';
 import LandingPage from './page/LandingPage';
 import Layout from './page/Layout';
 import SigninCompletePage from './page/SigninCompletePage';
+import SigninPage from './page/SigninPage';
 
 const routes = [
   {
@@ -31,6 +32,11 @@ const routes = [
         element: <AssetEditPage />,
       },
     ],
+  },
+
+  {
+    path: '/signin',
+    element: <SigninPage />,
   },
 ];
 

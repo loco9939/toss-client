@@ -18,6 +18,9 @@
     "codeceptjs:demo:ui": "codecept-ui --app  -c node_modules/@codeceptjs/examples"
   },
   "dependencies": {
+    "@supabase/auth-ui-react": "^0.4.7",
+    "@supabase/auth-ui-shared": "^0.1.8",
+    "@supabase/supabase-js": "^2.44.2",
     "aos": "^2.3.4",
     "axios": "^1.7.2",
     "dayjs": "^1.11.11",
