@@ -7,7 +7,7 @@ describe('Header', () => {
   it('renders Logo, navigation', () => {
     render(<Header />);
 
-    screen.getByText(/Toss/);
+    screen.getByRole('img');
     screen.getByRole('navigation');
     expect(screen.queryByRole('back')).toBeNull();
   });

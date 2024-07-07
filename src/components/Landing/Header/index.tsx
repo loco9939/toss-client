@@ -1,4 +1,4 @@
-import Icon_Logo from '@/assets/Icon_logo.png';
+import Tossfolio from '@/assets/Tossfolio.png';
 import styled from 'styled-components';
 
 const Navigation = styled.nav`
@@ -56,7 +56,7 @@ const Header = () => {
       <Navigation>
         <LogoContainer>
           <a href='/landing'>
-            <img src={Icon_Logo} alt='logo' />
+            <img src={Tossfolio} alt='logo' />
           </a>
         </LogoContainer>
         <NavContent>

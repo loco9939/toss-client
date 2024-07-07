@@ -12,7 +12,7 @@ describe('Routes', () => {
     });
 
     it('renders `Header` Toss and Home Component', () => {
-      screen.getByRole('heading', { name: 'Toss' });
+      screen.getByRole('img');
     });
 
     it('renders Home Component', () => {

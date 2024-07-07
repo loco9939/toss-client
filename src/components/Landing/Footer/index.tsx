@@ -35,7 +35,7 @@ const Footer = () => {
   return (
     <Container>
       <InnerFooter>
-        <p>© 2024 [Toss Portfolio]. All rights reserved.</p>
+        <p>© 2024 [Tossfolio]. All rights reserved.</p>
 
         <SocialMedia>
           <h4>SNS</h4>

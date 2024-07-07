@@ -1,3 +1,4 @@
+import TossfolioLogo from '@/assets/Tossfolio_logo.png';
 import { ChevronLeftBtn } from '@/components/UI';
 import { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
@@ -12,7 +13,8 @@ const StyledHeader = styled.header`
   padding: 1.6rem 1.2rem;
 `;
 
-const Logo = styled.h1`
+const Logo = styled.img`
+  width: 4.6rem;
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
@@ -35,7 +37,7 @@ const Header = () => {
   return (
     <StyledHeader>
       {isHomePage ? <div /> : <ChevronLeftBtn role='back' onClick={goBack} />}
-      <Logo onClick={goHome}>Toss</Logo>
+      <Logo src={TossfolioLogo} onClick={goHome} />
       <Gnb />
     </StyledHeader>
   );

@@ -116,7 +116,7 @@ const Content = () => {
       <HeadingBox>
         <Heading data-aos='fade-up' data-aos-once='false' data-aos-offset='400'>
           나만의 자산관리 <br />
-          <span>토스 포트폴리오</span>로 한번에
+          <span>토스폴리오</span>로 한번에
         </Heading>
       </HeadingBox>
       <ParagraphGrayContainer>
