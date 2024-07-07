@@ -7,12 +7,12 @@ const Navigation = styled.nav`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  background-color: #ffffff;
 `;
 
 const LogoContainer = styled.div`
   display: flex;
   align-items: center;
-  margin-right: 2.4rem;
   min-height: 6rem;
 
   a {
