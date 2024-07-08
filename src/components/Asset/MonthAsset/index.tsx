@@ -64,8 +64,6 @@ const MonthAsset = ({ year, asset }: MonthAssetProps) => {
     navigate(`/asset-detail?year=${year}&month=${month}`);
   };
 
-  console.log('====asset: ', asset);
-
   if (!asset?.dw) {
     return (
       <NoAssetItem onClick={handleClickItem}>

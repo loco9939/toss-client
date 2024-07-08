@@ -31,6 +31,8 @@ export type BarChartData = {
   amount: number;
 };
 
+export type User = { email: string; name: string };
+
 export const ASSET_DISPLAY: { [key: string]: string } = {
   dw: '입출금',
   saving: '저축',
