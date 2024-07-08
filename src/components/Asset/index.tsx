@@ -25,10 +25,6 @@ const Asset = () => {
     return <p>로딩중...</p>;
   }
 
-  if (yearAssets.length === 0) {
-    return <p>실패...</p>;
-  }
-
   return (
     <section>
       <YearSelect year={Number(year ?? 0)} />
