@@ -1,4 +1,5 @@
-import { Outlet } from 'react-router-dom';
+import useSession from '@/hooks/useSession';
+import { Outlet, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import Footer from '../components/Layout/Footer';
 import Header from '../components/Layout/Header';
@@ -18,6 +19,13 @@ const StyledLayout = styled.div`
 `;
 
 const Layout = () => {
+  const navigate = useNavigate();
+  const { session } = useSession();
+
+  if (!session) {
+    navigate('/landing');
+  }
+
   return (
     <StyledLayout>
       <Header />

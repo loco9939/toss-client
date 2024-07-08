@@ -1,3 +1,4 @@
+import useSession from '@/hooks/useSession';
 import dayjs from 'dayjs';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
@@ -33,10 +34,14 @@ const Nav = styled.nav`
 `;
 
 const Gnb = () => {
+  const { removeSession } = useSession();
   const navigate = useNavigate();
   const year = dayjs().year();
 
-  const handleLogout = () => {};
+  const handleLogout = () => {
+    removeSession();
+    navigate('/landing');
+  };
   return (
     <Nav>
       <li onClick={() => navigate('/')}>홈으로</li>

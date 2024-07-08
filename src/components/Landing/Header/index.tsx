@@ -1,4 +1,5 @@
 import Tossfolio from '@/assets/Tossfolio.png';
+import useSession from '@/hooks/useSession';
 import styled from 'styled-components';
 
 const Navigation = styled.nav`
@@ -51,6 +52,7 @@ const NavItem = styled.li`
 `;
 
 const Header = () => {
+  const { session } = useSession();
   return (
     <header>
       <Navigation>
@@ -62,10 +64,7 @@ const Header = () => {
         <NavContent>
           <NavMenu>
             <NavItem>
-              <a href='/signin'>로그인</a>
-            </NavItem>
-            <NavItem>
-              <a href='/signup'>회원가입</a>
+              {session ? <a href='/'>홈으로</a> : <a href='/signin'>로그인</a>}
             </NavItem>
           </NavMenu>
         </NavContent>

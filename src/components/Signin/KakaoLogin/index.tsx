@@ -1,6 +1,6 @@
 import kakao_large from '@/assets/kakao_login_large_wide.png';
 import kakao_medium from '@/assets/kakao_login_medium_wide.png';
-import signInWithKakao from '@/utils/signInWithKakao';
+import useSession from '@/hooks/useSession';
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
@@ -15,10 +15,15 @@ const KakaoLoginButton = styled.img.attrs({
 `;
 
 const KakaoLogin = () => {
+  const { registerSession } = useSession();
   const [width, setWidth] = useState(window.innerWidth);
 
   const handleResize = () => {
     setWidth(window.innerWidth);
+  };
+
+  const handleSignIn = () => {
+    registerSession();
   };
 
   useEffect(() => {
@@ -32,7 +37,7 @@ const KakaoLogin = () => {
   const underBreakPoint = width < 640;
   return (
     <KakaoLoginButton
-      onClick={signInWithKakao}
+      onClick={handleSignIn}
       src={underBreakPoint ? kakao_medium : kakao_large}
     />
   );
