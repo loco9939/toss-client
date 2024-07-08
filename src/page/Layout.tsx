@@ -14,6 +14,7 @@ const StyledLayout = styled.div`
   margin-inline: auto;
 
   main {
+    position: relative;
     padding: 1.2rem;
   }
 `;

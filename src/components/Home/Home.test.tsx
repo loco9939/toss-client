@@ -35,9 +35,11 @@ describe('Home', () => {
       render(<Home />);
     });
 
-    it('renders nothing', async () => {
+    it('renders "자산 등록 하러 가기" button', async () => {
       await waitFor(() => {
-        expect(screen.getByText(/실패/));
+        screen.getByRole('button', {
+          name: '자산 등록 하러 가기',
+        });
       });
     });
   });

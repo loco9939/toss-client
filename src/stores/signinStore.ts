@@ -1,26 +1,30 @@
 import { create } from 'zustand';
 
 import supabase from '@/utils/supabase';
-import { Session, Subscription } from '@supabase/supabase-js';
+import { Session, Subscription, User } from '@supabase/supabase-js';
 
 export type SigninStore = {
+  user: User | null;
   session: Session | null;
   subscription: Subscription | null;
   signInWithKakao: () => void;
   signOut: () => void;
   getSession: () => void;
+  getUser: (jwt?: string) => void;
   connectSubscription: () => void;
   disconnectSubscription: () => void;
 };
 
 const signinStore = create<SigninStore>((set, get) => ({
+  user: null,
   session: null,
   subscription: null,
   signInWithKakao: async () => {
     const { error } = await supabase.auth.signInWithOAuth({
       provider: 'kakao',
       options: {
-        redirectTo: 'https://qvoiduranowziowofcvl.supabase.co/auth/v1/callback',
+        // redirectTo: 'https://qvoiduranowziowofcvl.supabase.co/auth/v1/callback',
+        redirectTo: `${import.meta.env.VITE_BASE_URL}/signin-complete`,
       },
     });
 
@@ -42,7 +46,15 @@ const signinStore = create<SigninStore>((set, get) => ({
       data: { session },
     } = await supabase.auth.getSession();
 
+    get().getUser(session?.access_token);
     set(() => ({ session }));
+  },
+  getUser: async (jwt?: string) => {
+    const {
+      data: { user },
+    } = await supabase.auth.getUser(jwt);
+
+    set(() => ({ user }));
   },
   connectSubscription: () => {
     // auth의 상태를 관찰하여 변경 시 실행

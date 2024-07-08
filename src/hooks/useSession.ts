@@ -2,7 +2,7 @@ import signinStore from '@/stores/signinStore';
 import { useEffect } from 'react';
 
 const useSession = () => {
-  const { session, getSession, signInWithKakao, signOut } = signinStore();
+  const { user, session, getSession, signInWithKakao, signOut } = signinStore();
 
   const registerSession = () => {
     signInWithKakao();
@@ -16,7 +16,7 @@ const useSession = () => {
     getSession();
   }, []);
 
-  return { session, registerSession, removeSession };
+  return { session, user, registerSession, removeSession };
 };
 
 export default useSession;
