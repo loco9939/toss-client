@@ -63,7 +63,7 @@ const AssetEdit = () => {
     <section>
       <YearSelect year={year} month={month} />
       <MonthSelect year={year} month={month} />
-      <PieChartContainer>
+      <PieChartContainer role='pie-chart-container'>
         {isEmpty ? (
           <Nodata>Empty</Nodata>
         ) : (

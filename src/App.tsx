@@ -1,27 +1,21 @@
-import { useEffect } from 'react';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
 import { Reset } from 'styled-reset';
+import useCleanHash from './hooks/useCleanHash';
+import useSession from './hooks/useSession';
 import routes from './routes';
 import defaultTheme from './styles/defaultTheme';
 import GlobalStyle from './styles/globalStyles';
 
 const router = createBrowserRouter(routes);
 
-// NOTE: Hash 제거
-function removeLocationHash() {
-  const noHashURL = window.location.href.replace(/#.*$/, '');
-  window.history.replaceState('', document.title, noHashURL);
-}
-
 function App() {
   const theme = defaultTheme;
 
-  useEffect(() => {
-    window.addEventListener('load', removeLocationHash);
+  useCleanHash();
 
-    return () => window.removeEventListener('load', removeLocationHash);
-  }, []);
+  useSession();
+
   return (
     <ThemeProvider theme={theme}>
       <Reset />

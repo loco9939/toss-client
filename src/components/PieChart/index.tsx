@@ -30,7 +30,7 @@ const PieChart = ({
 }: BarChartProps) => {
   return (
     <ResponsiveContainer width='100%' height='100%'>
-      <OriginPieChart>
+      <OriginPieChart role='pie-chart'>
         <Pie
           data={data}
           labelLine={false}

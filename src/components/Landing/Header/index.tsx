@@ -1,5 +1,5 @@
 import Tossfolio from '@/assets/Tossfolio.png';
-import useSession from '@/hooks/useSession';
+import sessionStore from '@/stores/sessionStore';
 import styled from 'styled-components';
 
 const Navigation = styled.nav`
@@ -52,7 +52,8 @@ const NavItem = styled.li`
 `;
 
 const Header = () => {
-  const { session } = useSession();
+  const session = sessionStore(state => state.session);
+
   return (
     <header>
       <Navigation>

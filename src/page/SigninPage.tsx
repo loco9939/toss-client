@@ -1,10 +1,10 @@
 import Signin from '@/components/Signin';
-import useSession from '@/hooks/useSession';
+import sessionStore from '@/stores/sessionStore';
 import { useNavigate } from 'react-router-dom';
 
 const SigninPage = () => {
   const navigate = useNavigate();
-  const { session } = useSession();
+  const session = sessionStore(state => state.session);
 
   if (session) {
     navigate('/');

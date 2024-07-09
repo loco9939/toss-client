@@ -59,7 +59,6 @@ const MonthAsset = ({ year, asset }: MonthAssetProps) => {
   const navigate = useNavigate();
   const month = Number(`${asset?.date}`.split('-')[1]);
 
-  // TODO: monthAsset 클릭 시 asset-detail 이동 로직 구현하기
   const handleClickItem = () => {
     navigate(`/asset-detail?year=${year}&month=${month}`);
   };

@@ -1,4 +1,4 @@
-import useSession from '@/hooks/useSession';
+import sessionStore from '@/stores/sessionStore';
 import dayjs from 'dayjs';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
@@ -34,12 +34,12 @@ const Nav = styled.nav`
 `;
 
 const Gnb = () => {
-  const { removeSession } = useSession();
+  const signOut = sessionStore(state => state.signOut);
   const navigate = useNavigate();
   const year = dayjs().year();
 
   const handleLogout = () => {
-    removeSession();
+    signOut();
     navigate('/landing');
   };
   return (

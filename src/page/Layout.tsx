@@ -1,4 +1,4 @@
-import useSession from '@/hooks/useSession';
+import sessionStore from '@/stores/sessionStore';
 import { Outlet, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import Footer from '../components/Layout/Footer';
@@ -21,7 +21,7 @@ const StyledLayout = styled.div`
 
 const Layout = () => {
   const navigate = useNavigate();
-  const { session } = useSession();
+  const session = sessionStore(state => state.session);
 
   if (!session) {
     navigate('/landing');

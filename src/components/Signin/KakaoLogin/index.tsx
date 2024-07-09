@@ -1,11 +1,11 @@
 import kakao_large from '@/assets/kakao_login_large_wide.png';
 import kakao_medium from '@/assets/kakao_login_medium_wide.png';
-import useSession from '@/hooks/useSession';
+import sessionStore from '@/stores/sessionStore';
 import { DetailedHTMLProps, HTMLAttributes } from 'react';
 import styled from 'styled-components';
 
 type KakaoLoginProps = {
-  $underBreakPoint: boolean;
+  $underBreakPoint?: boolean;
 } & DetailedHTMLProps<HTMLAttributes<HTMLImageElement>, HTMLImageElement>;
 
 const KakaoLoginButton = styled.img.attrs({
@@ -19,10 +19,10 @@ const KakaoLoginButton = styled.img.attrs({
 `;
 
 const KakaoLogin = ({ $underBreakPoint }: KakaoLoginProps) => {
-  const { registerSession } = useSession();
+  const signInWithKakao = sessionStore(state => state.signInWithKakao);
 
   const handleSignIn = () => {
-    registerSession();
+    signInWithKakao();
   };
 
   return (

@@ -1,13 +1,13 @@
 import { render, screen, waitFor } from '@testing-library/react';
 import { RouterProvider, createMemoryRouter } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
-import useSession from './hooks/useSession';
 import routes from './routes';
+import sessionStore from './stores/sessionStore';
 import defaultTheme from './styles/defaultTheme';
 
 const context = describe;
 
-vi.mock('@/hooks/useSession', () => ({
+vi.mock('@/stores/sessionStore', () => ({
   default: vi.fn(),
 }));
 
@@ -90,7 +90,7 @@ describe('Routes', () => {
 
 export function renderRouter(path: string, session?: string) {
   const router = createMemoryRouter(routes, { initialEntries: [path] });
-  (useSession as jest.Mock).mockReturnValue({ session });
+  (sessionStore as unknown as jest.Mock).mockReturnValue(session);
   render(
     <ThemeProvider theme={defaultTheme}>
       <RouterProvider router={router} />

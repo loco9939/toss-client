@@ -13,7 +13,7 @@ type FormProps = {
   updateMonthAsset: ({ year, month, asset }: UpdateMonthAssetProps) => void;
 };
 
-const StyledForm = styled.form`
+const StyledForm = styled.form.attrs({ role: 'form' })`
   display: flex;
   flex-direction: column;
   gap: 1.4rem;
@@ -89,7 +89,7 @@ const Form = ({ year, month, data, handler, updateMonthAsset }: FormProps) => {
   };
 
   return (
-    <StyledForm action='' onSubmit={handleSubmit}>
+    <StyledForm onSubmit={handleSubmit}>
       <Legend>단위: 원</Legend>
       <label htmlFor='dw'>
         입출금

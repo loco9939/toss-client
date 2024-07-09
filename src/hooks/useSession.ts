@@ -1,22 +1,14 @@
-import signinStore from '@/stores/signinStore';
+import sessionStore from '@/stores/sessionStore';
 import { useEffect } from 'react';
 
 const useSession = () => {
-  const { user, session, getSession, signInWithKakao, signOut } = signinStore();
-
-  const registerSession = () => {
-    signInWithKakao();
-  };
-
-  const removeSession = () => {
-    signOut();
-  };
+  const { getSession, onAuthStateChange } = sessionStore();
 
   useEffect(() => {
     getSession();
-  }, []);
 
-  return { session, user, registerSession, removeSession };
+    onAuthStateChange();
+  }, []);
 };
 
 export default useSession;

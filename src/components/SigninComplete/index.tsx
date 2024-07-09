@@ -1,4 +1,4 @@
-import useSession from '@/hooks/useSession';
+import sessionStore from '@/stores/sessionStore';
 import dayjs from 'dayjs';
 import { useNavigate } from 'react-router-dom';
 import styled, { keyframes } from 'styled-components';
@@ -63,13 +63,14 @@ const SigninComplete = () => {
   const navigate = useNavigate();
   const year = dayjs().get('year');
 
-  const { user } = useSession();
+  const session = sessionStore(state => state.session);
 
   return (
     <Container>
       <Icon>🎉</Icon>
       <Text>
-        <span>{user?.user_metadata?.user_name}</span>님 환영합니다!
+        <span>{session?.user?.user_metadata?.user_name ?? '회원'}</span>님
+        환영합니다!
       </Text>
       <Text>자산을 등록 해주세요!</Text>
 
