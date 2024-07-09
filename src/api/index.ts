@@ -18,14 +18,29 @@ class ApiService {
   });
 
   async fetchLatestAssets() {
-    try {
-      const { data } = await this.instance.get<LatestAsset[]>(`/assets/latest`);
+    // try {
+    //   const { data } = await this.instance.get<LatestAsset[]>(`/assets/latest`);
 
-      const latestAssetsRes = data.map(d => ({ ...d.assets, date: d.date }));
-      return latestAssetsRes;
-    } catch (error) {
+    //   const latestAssetsRes = data.map(d => ({ ...d.assets, date: d.date }));
+    //   return latestAssetsRes;
+    // } catch (error) {
+    //   new Error(`Failed: ${error}`);
+    //   return [];
+    // }
+    const { data, error } = await supabase
+      .from('assets')
+      .select()
+      .returns<Record<string, string | number>[]>();
+
+    if (error) {
       new Error(`Failed: ${error}`);
       return [];
+    } else {
+      const latestAssetsRes = data.map(d => {
+        const { id, dw, saving, investment, pension, debt, date } = d;
+        return { id, dw, saving, investment, pension, debt, date };
+      });
+      return latestAssetsRes;
     }
   }
 
