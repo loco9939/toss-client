@@ -23,7 +23,12 @@ export type MonthAssetFormStore = {
     year?: string;
     month?: string;
   }) => Promise<void>;
-  updateMonthAsset: ({ year, month, asset }: UpdateMonthAssetProps) => void;
+  updateMonthAsset: ({
+    year,
+    month,
+    asset,
+    user_id,
+  }: UpdateMonthAssetProps) => void;
 };
 
 const monthAssetFormStore = create<MonthAssetFormStore>((set, get) => ({
@@ -69,13 +74,14 @@ const monthAssetFormStore = create<MonthAssetFormStore>((set, get) => ({
       debt: Number(debt),
     }));
   },
-  updateMonthAsset: async ({ year, month, asset }) => {
+  updateMonthAsset: async ({ year, month, asset, user_id }) => {
     get().resetDone();
 
     await apiService.updateMonthAsset({
       year,
       month,
       asset,
+      user_id,
     });
 
     get().complete();

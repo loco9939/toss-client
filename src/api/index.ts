@@ -1,4 +1,4 @@
-import { LatestAsset, User } from '@/types';
+import { LatestAsset } from '@/types';
 import supabase from '@/utils/supabase';
 import axios from 'axios';
 
@@ -9,6 +9,7 @@ export type UpdateMonthAssetProps = {
   year?: string;
   month?: string;
   asset: Record<string, string | number | undefined>;
+  user_id?: string;
 };
 
 class ApiService {
@@ -61,29 +62,30 @@ class ApiService {
     }
   }
 
-  async updateMonthAsset({ year, month, asset }: UpdateMonthAssetProps) {
-    try {
-      await this.instance.put(`/assets/monthly`, {
-        year,
-        month,
-        asset: { ...asset },
-      });
-    } catch (error) {
-      throw new Error(`Failed to update asset: ${error}`);
-    }
-  }
+  async updateMonthAsset({
+    year,
+    month,
+    asset,
+    user_id,
+  }: UpdateMonthAssetProps) {
+    // try {
+    //   await this.instance.put(`/assets/monthly`, {
+    //     year,
+    //     month,
+    //     asset: { ...asset },
+    //   });
+    // } catch (error) {
+    //   throw new Error(`Failed to update asset: ${error}`);
+    // }
 
-  async createUser({ email, name }: User) {
-    const { data, error } = await supabase
-      .from('users')
-      .insert([{ email, name }]);
+    const { error } = await supabase.from('assets').insert({
+      user_id,
+      date: `${year}-${month?.padStart(2, '0')}`,
+      ...asset,
+    });
 
     if (error) {
-      console.error('Error creating user:', error);
-      return null;
-    } else {
-      console.log('User created:', data);
-      return data;
+      throw new Error(`Failed to update asset: ${error}`);
     }
   }
 }

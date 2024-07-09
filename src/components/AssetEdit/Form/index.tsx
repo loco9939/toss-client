@@ -1,4 +1,5 @@
 import { UpdateMonthAssetProps } from '@/api';
+import sessionStore from '@/stores/sessionStore';
 import convertKRW from '@/utils/convertKRW';
 import handleNumericChange from '@/utils/handleNumericChange';
 import { FormEventHandler, useState } from 'react';
@@ -10,7 +11,12 @@ type FormProps = {
   month: number;
   data: Record<string, number>;
   handler: Record<string, (value: string) => void>;
-  updateMonthAsset: ({ year, month, asset }: UpdateMonthAssetProps) => void;
+  updateMonthAsset: ({
+    year,
+    month,
+    asset,
+    user_id,
+  }: UpdateMonthAssetProps) => void;
 };
 
 const StyledForm = styled.form.attrs({ role: 'form' })`
@@ -67,6 +73,8 @@ const Form = ({ year, month, data, handler, updateMonthAsset }: FormProps) => {
     debt: false,
   });
 
+  const session = sessionStore(state => state.session);
+
   const handleBlur = (field: string) => () => {
     setInputFocus({ ...inputFocus, [field]: false });
   };
@@ -81,6 +89,7 @@ const Form = ({ year, month, data, handler, updateMonthAsset }: FormProps) => {
       year: String(year),
       month: String(month),
       asset: { dw, saving, investment, pension, debt },
+      user_id: session?.user.id,
     });
 
     alert('자산이 등록되었습니다.');
