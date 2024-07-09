@@ -19,8 +19,8 @@ const Container = styled.div`
 const Logo = styled.img.attrs({
   src: Tossfolio,
   alt: 'tossfolio logo',
-})<{ underBreakPoint: boolean }>`
-  width: ${props => (props.underBreakPoint ? '12rem' : '32rem')};
+})<{ $underBreakPoint: boolean }>`
+  width: ${props => (props.$underBreakPoint ? '12rem' : '32rem')};
   margin-inline: auto;
   cursor: pointer;
 `;
@@ -33,12 +33,12 @@ const Signin = () => {
     navigate('/landing');
   };
 
-  const underBreakPoint = width < 640;
+  const $underBreakPoint = width < 640;
   return (
     <Container>
-      <Logo onClick={goLanding} underBreakPoint={underBreakPoint} />
+      <Logo onClick={goLanding} $underBreakPoint={$underBreakPoint} />
       <div>
-        <KakaoLogin underBreakPoint={underBreakPoint} />
+        <KakaoLogin $underBreakPoint={$underBreakPoint} />
       </div>
     </Container>
   );

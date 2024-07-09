@@ -5,7 +5,7 @@ import { DetailedHTMLProps, HTMLAttributes } from 'react';
 import styled from 'styled-components';
 
 type KakaoLoginProps = {
-  underBreakPoint: boolean;
+  $underBreakPoint: boolean;
 } & DetailedHTMLProps<HTMLAttributes<HTMLImageElement>, HTMLImageElement>;
 
 const KakaoLoginButton = styled.img.attrs({
@@ -18,7 +18,7 @@ const KakaoLoginButton = styled.img.attrs({
   }
 `;
 
-const KakaoLogin = ({ underBreakPoint }: KakaoLoginProps) => {
+const KakaoLogin = ({ $underBreakPoint }: KakaoLoginProps) => {
   const { registerSession } = useSession();
 
   const handleSignIn = () => {
@@ -28,7 +28,7 @@ const KakaoLogin = ({ underBreakPoint }: KakaoLoginProps) => {
   return (
     <KakaoLoginButton
       onClick={handleSignIn}
-      src={underBreakPoint ? kakao_medium : kakao_large}
+      src={$underBreakPoint ? kakao_medium : kakao_large}
     />
   );
 };
