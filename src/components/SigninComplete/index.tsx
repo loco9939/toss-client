@@ -2,6 +2,8 @@ import sessionStore from '@/stores/sessionStore';
 import dayjs from 'dayjs';
 import { useNavigate } from 'react-router-dom';
 import styled, { keyframes } from 'styled-components';
+import Spinner from '../UI/Spinner';
+import useCheckAsset from '@/hooks/useCheckAsset';
 
 const fadeUp = keyframes`
   from {
@@ -64,6 +66,12 @@ const SigninComplete = () => {
   const year = dayjs().get('year');
 
   const session = sessionStore(state => state.session);
+
+  const { loading } = useCheckAsset();
+
+  if (loading) {
+    return <Spinner />;
+  }
 
   return (
     <Container>

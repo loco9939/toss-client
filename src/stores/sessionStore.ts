@@ -1,12 +1,13 @@
 import { create } from 'zustand';
 
 import supabase from '@/utils/supabase';
-import { Session } from '@supabase/supabase-js';
+import { AuthError, Session, User } from '@supabase/supabase-js';
 import { persist } from 'zustand/middleware';
 
 export type SessionStore = {
   session: Session | null;
   getSession: () => void;
+  getUser: () => Promise<{ user: User | null; error: AuthError | null }>;
   onAuthStateChange: () => void;
   signInWithKakao: () => void;
   signOut: () => void;
@@ -23,26 +24,30 @@ const sessionStore = create(
 
         set(() => ({ session }));
       },
+      getUser: async () => {
+        const {
+          data: { user },
+          error,
+        } = await supabase.auth.getUser();
+
+        if (error || !user) {
+          console.error('Error fetching user:', error);
+          return { user, error };
+        }
+
+        return { user, error };
+      },
       onAuthStateChange: () => {
         supabase.auth.onAuthStateChange((_, session) => {
           set(() => ({ session }));
         });
       },
       signInWithKakao: async () => {
-        // TODO: asset 데이터 있으면 홈으로, 없으면 signin-complete로
-        // const { data } = await supabase
-        //   .from('assets')
-        //   .select()
-        //   .returns<Record<string, string | number>[]>();
-
         const { data: signInData, error: signInError } =
           await supabase.auth.signInWithOAuth({
             provider: 'kakao',
             options: {
-              redirectTo:
-                // : data
-                //   ? '/'
-                `${import.meta.env.VITE_BASE_URL}/signin-complete`,
+              redirectTo: `${import.meta.env.VITE_BASE_URL}/signin-complete`,
             },
           });
 

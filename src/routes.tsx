@@ -13,7 +13,7 @@ const routes = [
   },
 
   {
-    element: <Layout />, // TODO: Auth 추가
+    element: <Layout />,
     children: [
       {
         path: '/',

@@ -4,10 +4,15 @@ import { ThemeProvider } from 'styled-components';
 import routes from './routes';
 import sessionStore from './stores/sessionStore';
 import defaultTheme from './styles/defaultTheme';
+import useCheckAsset from './hooks/useCheckAsset';
 
 const context = describe;
 
 vi.mock('@/stores/sessionStore', () => ({
+  default: vi.fn(),
+}));
+
+vi.mock('@/hooks/useCheckAsset', () => ({
   default: vi.fn(),
 }));
 
@@ -42,9 +47,12 @@ describe('Routes', () => {
   });
 
   context('when the current path is "/signin-complete"', () => {
-    it('renders `자산 등록 하러 가기` button', () => {
+    it('renders `자산 등록 하러 가기` button', async () => {
       renderRouter('/signin-complete', 'test-user');
-      screen.getByRole('button', { name: '자산 등록 하러 가기' });
+
+      await waitFor(() => {
+        screen.getByRole('button', { name: '자산 등록 하러 가기' });
+      });
     });
   });
 
@@ -91,6 +99,7 @@ describe('Routes', () => {
 export function renderRouter(path: string, session?: string) {
   const router = createMemoryRouter(routes, { initialEntries: [path] });
   (sessionStore as unknown as jest.Mock).mockReturnValue(session);
+  (useCheckAsset as unknown as jest.Mock).mockReturnValue(false);
   render(
     <ThemeProvider theme={defaultTheme}>
       <RouterProvider router={router} />
