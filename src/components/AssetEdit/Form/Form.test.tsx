@@ -1,35 +1,24 @@
+import monthAssetFormStore from '@/stores/monthAssetFormStore';
 import { render } from '@/utils/test-helpers';
 import { fireEvent, screen } from '@testing-library/dom';
 import Form from '.';
 
-const mockedUpdateMonthAsset = vi.fn();
+const insertMonthAsset = vi.fn();
+const updateMonthAsset = vi.fn();
 
+vi.mock('@/stores/monthAssetFormStore', () => ({
+  default: vi.fn(),
+}));
+
+const context = describe;
 describe('Form', () => {
-  beforeEach(() => {
-    render(
-      <Form
-        year={2024}
-        month={12}
-        data={{
-          dw: 1000,
-          saving: 2000,
-          investment: 3000,
-          pension: 4000,
-          debt: 5000,
-        }}
-        handler={{
-          changeDw: vi.fn(),
-          changeSaving: vi.fn(),
-          changeInvestment: vi.fn(),
-          changePension: vi.fn(),
-          changeDebt: vi.fn(),
-        }}
-        updateMonthAsset={mockedUpdateMonthAsset}
-      />,
-    );
-  });
-
   it('renders 입출금, 저축, 투자, 연금, 부채 input, label', () => {
+    (monthAssetFormStore as unknown as jest.Mock).mockReturnValue({
+      insertMonthAsset,
+      updateMonthAsset,
+    });
+    render(<Form year={2024} month={12} />);
+
     screen.getByLabelText(/입출금/);
     screen.getByLabelText(/저축/);
     screen.getByLabelText(/투자/);
@@ -37,10 +26,31 @@ describe('Form', () => {
     screen.getByLabelText(/부채/);
   });
 
-  it('when click 등록 button, it will call edit API fn', () => {
-    const button = screen.getByRole('button', { name: /등록/ });
-    fireEvent.click(button);
+  context('when click 등록 button', () => {
+    it('if it received assetId, it will call update API fn', () => {
+      (monthAssetFormStore as unknown as jest.Mock).mockReturnValue({
+        insertMonthAsset,
+        updateMonthAsset,
+      });
+      render(<Form year={2024} month={12} assetId='test-asset' />);
 
-    expect(mockedUpdateMonthAsset).toHaveBeenCalled();
+      const button = screen.getByRole('button', { name: /등록/ });
+      fireEvent.click(button);
+
+      expect(updateMonthAsset).toHaveBeenCalled();
+    });
+
+    it("if it don't received assetId, it will call insert API fn", () => {
+      (monthAssetFormStore as unknown as jest.Mock).mockReturnValue({
+        insertMonthAsset,
+        updateMonthAsset,
+      });
+      render(<Form year={2024} month={12} />);
+
+      const button = screen.getByRole('button', { name: /등록/ });
+      fireEvent.click(button);
+
+      expect(insertMonthAsset).toHaveBeenCalled();
+    });
   });
 });

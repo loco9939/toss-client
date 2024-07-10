@@ -1,4 +1,4 @@
-import { UpdateMonthAssetProps } from '@/api';
+import monthAssetFormStore from '@/stores/monthAssetFormStore';
 import sessionStore from '@/stores/sessionStore';
 import convertKRW from '@/utils/convertKRW';
 import handleNumericChange from '@/utils/handleNumericChange';
@@ -9,14 +9,7 @@ import styled from 'styled-components';
 type FormProps = {
   year: number;
   month: number;
-  data: Record<string, number>;
-  handler: Record<string, (value: string) => void>;
-  updateMonthAsset: ({
-    year,
-    month,
-    asset,
-    user_id,
-  }: UpdateMonthAssetProps) => void;
+  assetId?: string;
 };
 
 const StyledForm = styled.form.attrs({ role: 'form' })`
@@ -54,16 +47,22 @@ const Legend = styled.p`
   font-size: ${props => props.theme.fontSize.sm};
 `;
 
-const Form = ({ year, month, data, handler, updateMonthAsset }: FormProps) => {
+const Form = ({ assetId, month, year }: FormProps) => {
   const navigate = useNavigate();
-  const { dw, saving, investment, pension, debt } = data;
   const {
+    dw,
+    saving,
+    investment,
+    pension,
+    debt,
     changeDw,
     changeSaving,
     changeInvestment,
     changePension,
     changeDebt,
-  } = handler;
+    insertMonthAsset,
+    updateMonthAsset,
+  } = monthAssetFormStore();
 
   const [inputFocus, setInputFocus] = useState({
     dw: false,
@@ -85,12 +84,23 @@ const Form = ({ year, month, data, handler, updateMonthAsset }: FormProps) => {
 
   const handleSubmit: FormEventHandler<HTMLFormElement> = event => {
     event.preventDefault();
-    updateMonthAsset({
-      year: String(year),
-      month: String(month),
-      asset: { dw, saving, investment, pension, debt },
-      user_id: session?.user.id,
-    });
+
+    if (assetId) {
+      updateMonthAsset({
+        // year: String(year),
+        // month: String(month),
+        asset: { dw, saving, investment, pension, debt },
+        // user_id: session?.user.id,
+        id: assetId,
+      });
+    } else {
+      insertMonthAsset({
+        year: String(year),
+        month: String(month),
+        asset: { dw, saving, investment, pension, debt },
+        user_id: session?.user.id,
+      });
+    }
 
     alert('자산이 등록되었습니다.');
 

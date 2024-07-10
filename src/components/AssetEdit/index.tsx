@@ -1,4 +1,6 @@
-import useUpdateMonthAsset from '@/hooks/useUpdateMonthAsset';
+import useFetchMonthAsset from '@/hooks/useFetchMonthAsset';
+import monthAssetFormStore from '@/stores/monthAssetFormStore';
+import sessionStore from '@/stores/sessionStore';
 import convertPieChartData from '@/utils/convertPieChartData';
 import { useSearchParams } from 'react-router-dom';
 import styled from 'styled-components';
@@ -35,28 +37,18 @@ const AssetEdit = () => {
   const year = Number(params.get('year') ?? '0');
   const month = Number(params.get('month') ?? '0');
 
-  const {
-    dw,
-    saving,
-    investment,
-    pension,
-    debt,
-    changeDw,
-    changeSaving,
-    changeInvestment,
-    changePension,
-    changeDebt,
-    updateMonthAsset,
-  } = useUpdateMonthAsset({ year: String(year), month: String(month) });
+  const session = sessionStore(state => state.session);
+
+  const { dw, saving, investment, pension, debt } = monthAssetFormStore();
+
+  const { assetId } = useFetchMonthAsset({
+    user_id: session?.user?.id,
+    year: String(year),
+    month: String(month),
+  });
 
   const data = { dw, saving, investment, pension, debt };
-  const handler = {
-    changeDw,
-    changeSaving,
-    changeInvestment,
-    changePension,
-    changeDebt,
-  };
+
   const pieChartData = convertPieChartData(data);
   const isEmpty = !dw && !saving && !investment && !pension && !debt;
   return (
@@ -72,13 +64,7 @@ const AssetEdit = () => {
       </PieChartContainer>
       <Legend />
 
-      <Form
-        year={year}
-        month={month}
-        data={data}
-        handler={handler}
-        updateMonthAsset={updateMonthAsset}
-      />
+      <Form year={year} month={month} assetId={assetId} />
     </section>
   );
 };

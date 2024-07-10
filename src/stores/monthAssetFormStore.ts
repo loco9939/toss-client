@@ -24,8 +24,15 @@ export type MonthAssetFormStore = {
     user_id?: string;
     year?: string;
     month?: string;
-  }) => Promise<void>;
-  updateMonthAsset: ({ year, month, asset, user_id }: MonthAssetProps) => void;
+  }) => Promise<string | undefined>;
+  insertMonthAsset: ({ year, month, asset, user_id }: MonthAssetProps) => void;
+  updateMonthAsset: ({
+    year,
+    month,
+    asset,
+    user_id,
+    id,
+  }: MonthAssetProps) => void;
 };
 
 const monthAssetFormStore = create<MonthAssetFormStore>((set, get) => ({
@@ -62,24 +69,55 @@ const monthAssetFormStore = create<MonthAssetFormStore>((set, get) => ({
       year,
       month,
     });
-    const { dw, saving, investment, pension, debt } = monthAsset;
 
-    set(() => ({
-      dw,
-      saving,
-      investment,
-      pension,
-      debt,
-    }));
+    if (!monthAsset) {
+      set(() => ({
+        dw: 0,
+        saving: 0,
+        investment: 0,
+        pension: 0,
+        debt: 0,
+      }));
+      return;
+    } else {
+      const { id, dw, saving, investment, pension, debt } = monthAsset;
+
+      set(() => ({
+        dw: Number(dw),
+        saving: Number(saving),
+        investment: Number(investment),
+        pension: Number(pension),
+        debt: Number(debt),
+      }));
+      return String(id);
+    }
   },
-  updateMonthAsset: async ({ year, month, asset, user_id }) => {
+  insertMonthAsset: async ({ year, month, asset, user_id }) => {
     get().resetDone();
 
-    await apiService.updateMonthAsset({
+    await apiService.insertMonthAsset({
       year,
       month,
       asset,
       user_id,
+    });
+
+    get().complete();
+  },
+  updateMonthAsset: async ({
+    // year, month,
+    asset,
+    id,
+    //  , user_id
+  }) => {
+    get().resetDone();
+
+    await apiService.updateMonthAsset({
+      // year,
+      // month,
+      asset,
+      id,
+      // user_id,
     });
 
     get().complete();

@@ -63,7 +63,7 @@ const MonthAsset = ({ year, asset }: MonthAssetProps) => {
     navigate(`/asset-detail?year=${year}&month=${month}`);
   };
 
-  if (!asset?.dw) {
+  if (asset?.dw === undefined) {
     return (
       <NoAssetItem onClick={handleClickItem}>
         <p>자산 등록</p>
