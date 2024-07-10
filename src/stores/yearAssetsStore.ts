@@ -1,29 +1,21 @@
 import { create } from 'zustand';
 
 import { apiService } from '@/api';
+import addMissingMonths from '@/utils/addMissingMonths';
 
 export type YearAssetsStore = {
   loading: boolean;
   yearAssets: Record<string, number | string | undefined>[];
   startLoading: () => void;
   finishLoading: () => void;
-  fetchYearAssets: ({ year }: { year?: string }) => Promise<void>;
+  fetchYearAssets: ({
+    user_id,
+    year,
+  }: {
+    user_id?: string;
+    year?: string;
+  }) => Promise<void>;
 };
-
-const yearAssetContainers = [
-  { date: '2024-01' },
-  { date: '2024-02' },
-  { date: '2024-03' },
-  { date: '2024-04' },
-  { date: '2024-05' },
-  { date: '2024-06' },
-  { date: '2024-07' },
-  { date: '2024-08' },
-  { date: '2024-09' },
-  { date: '2024-10' },
-  { date: '2024-11' },
-  { date: '2024-12' },
-];
 
 const yearAssetsStore = create<YearAssetsStore>((set, get) => ({
   loading: false,
@@ -34,14 +26,13 @@ const yearAssetsStore = create<YearAssetsStore>((set, get) => ({
   finishLoading: () => {
     set(() => ({ loading: false }));
   },
-  fetchYearAssets: async ({ year }) => {
+  fetchYearAssets: async ({ user_id, year }) => {
     get().startLoading();
 
-    const yearAssetsRes = await apiService.fetchYearAssets({ year });
+    const yearAssetsRes = await apiService.fetchYearAssets({ user_id, year });
 
     set(() => ({
-      yearAssets:
-        yearAssetsRes.length !== 0 ? yearAssetsRes : yearAssetContainers,
+      yearAssets: addMissingMonths(yearAssetsRes),
     }));
 
     get().finishLoading();

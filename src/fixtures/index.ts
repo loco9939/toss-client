@@ -8,6 +8,7 @@ import monthAsset from './monthAsset';
 import pieChartData from './pieChartData';
 import prevAssetResponse from './prevAssetResponse';
 import yearAssets from './yearAssets';
+import yearAssetsResponse from './yearAssetsResponse';
 
 const fixtures = {
   assetResponse,
@@ -19,6 +20,7 @@ const fixtures = {
   latestAssetsResponse,
   monthAsset,
   yearAssets,
+  yearAssetsResponse,
   pieChartData,
 };
 

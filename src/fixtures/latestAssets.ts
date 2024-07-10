@@ -5,7 +5,7 @@ const latestAssets: Record<string, string | number>[] = [
     investment: 1100000,
     pension: 1600000,
     debt: 2100000,
-    date: '2024-06-01',
+    date: '2024-06',
   },
   {
     dw: 140000,
@@ -13,7 +13,7 @@ const latestAssets: Record<string, string | number>[] = [
     investment: 1050000,
     pension: 1550000,
     debt: 2000000,
-    date: '2024-05-01',
+    date: '2024-05',
   },
   {
     dw: 120000,
@@ -21,7 +21,7 @@ const latestAssets: Record<string, string | number>[] = [
     investment: 1000000,
     pension: 1450000,
     debt: 1900000,
-    date: '2024-04-01',
+    date: '2024-04',
   },
   {
     dw: 110000,
@@ -29,7 +29,7 @@ const latestAssets: Record<string, string | number>[] = [
     investment: 900000,
     pension: 1530000,
     debt: 1900000,
-    date: '2024-03-01',
+    date: '2024-03',
   },
   {
     dw: 100000,
@@ -37,7 +37,7 @@ const latestAssets: Record<string, string | number>[] = [
     investment: 890000,
     pension: 1510000,
     debt: 1890000,
-    date: '2024-02-01',
+    date: '2024-02',
   },
   {
     dw: 90000,
@@ -45,7 +45,7 @@ const latestAssets: Record<string, string | number>[] = [
     investment: 880000,
     pension: 1500000,
     debt: 1850000,
-    date: '2024-01-01',
+    date: '2024-01',
   },
 ];
 

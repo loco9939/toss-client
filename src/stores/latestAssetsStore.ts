@@ -7,7 +7,7 @@ export type LatestAssetsStore = {
   latestAssets: Record<string, number | string | undefined>[];
   startLoading: () => void;
   finishLoading: () => void;
-  fetchLatestAssets: () => Promise<void>;
+  fetchLatestAssets: ({ user_id }: { user_id?: string }) => Promise<void>;
 };
 
 const latestAssetsStore = create<LatestAssetsStore>((set, get) => ({
@@ -19,10 +19,10 @@ const latestAssetsStore = create<LatestAssetsStore>((set, get) => ({
   finishLoading: () => {
     set(() => ({ loading: false }));
   },
-  fetchLatestAssets: async () => {
+  fetchLatestAssets: async ({ user_id }) => {
     get().startLoading();
 
-    const latestAssetsRes = await apiService.fetchLatestAssets();
+    const latestAssetsRes = await apiService.fetchLatestAssets({ user_id });
 
     set(() => ({ latestAssets: latestAssetsRes }));
     // set(() => ({ latestAssets: latestAssets }));

@@ -5,7 +5,7 @@ const yearAssets: Record<string, string | number | undefined>[] = [
     investment: 200000,
     pension: 300000,
     debt: 500000,
-    date: '2024-01-01',
+    date: '2024-01',
   },
   {
     dw: 110000,
@@ -13,7 +13,7 @@ const yearAssets: Record<string, string | number | undefined>[] = [
     investment: 210000,
     pension: 310000,
     debt: 490000,
-    date: '2024-02-01',
+    date: '2024-02',
   },
   {
     dw: 120000,
@@ -21,7 +21,7 @@ const yearAssets: Record<string, string | number | undefined>[] = [
     investment: 220000,
     pension: 320000,
     debt: 480000,
-    date: '2024-03-01',
+    date: '2024-03',
   },
   {
     dw: 130000,
@@ -29,7 +29,7 @@ const yearAssets: Record<string, string | number | undefined>[] = [
     investment: 230000,
     pension: 330000,
     debt: 470000,
-    date: '2024-04-01',
+    date: '2024-04',
   },
   {
     dw: 140000,
@@ -37,7 +37,7 @@ const yearAssets: Record<string, string | number | undefined>[] = [
     investment: 240000,
     pension: 340000,
     debt: 460000,
-    date: '2024-05-01',
+    date: '2024-05',
   },
   {
     dw: 150000,
@@ -45,7 +45,7 @@ const yearAssets: Record<string, string | number | undefined>[] = [
     investment: 250000,
     pension: 350000,
     debt: 450000,
-    date: '2024-06-01',
+    date: '2024-06',
   },
   {
     dw: 160000,
@@ -53,7 +53,7 @@ const yearAssets: Record<string, string | number | undefined>[] = [
     investment: 260000,
     pension: 360000,
     debt: 440000,
-    date: '2024-07-01',
+    date: '2024-07',
   },
   {
     dw: 170000,
@@ -61,7 +61,7 @@ const yearAssets: Record<string, string | number | undefined>[] = [
     investment: 270000,
     pension: 370000,
     debt: 430000,
-    date: '2024-08-01',
+    date: '2024-08',
   },
   {
     dw: 180000,
@@ -69,7 +69,7 @@ const yearAssets: Record<string, string | number | undefined>[] = [
     investment: 280000,
     pension: 380000,
     debt: 420000,
-    date: '2024-09-01',
+    date: '2024-09',
   },
   {
     dw: 190000,
@@ -77,7 +77,7 @@ const yearAssets: Record<string, string | number | undefined>[] = [
     investment: 290000,
     pension: 390000,
     debt: 410000,
-    date: '2024-10-01',
+    date: '2024-10',
   },
   {
     dw: 200000,
@@ -85,10 +85,10 @@ const yearAssets: Record<string, string | number | undefined>[] = [
     investment: 300000,
     pension: 400000,
     debt: 400000,
-    date: '2024-11-01',
+    date: '2024-11',
   },
   {
-    date: '2024-12-01',
+    date: '2024-12',
   },
 ];
 

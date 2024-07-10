@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 
-import { apiService, UpdateMonthAssetProps } from '@/api';
+import { apiService, MonthAssetProps } from '@/api';
 
 export type MonthAssetFormStore = {
   dw: number;
@@ -17,18 +17,15 @@ export type MonthAssetFormStore = {
   resetDone: () => void;
   complete: () => void;
   fetchMonthAsset: ({
+    user_id,
     year,
     month,
   }: {
+    user_id?: string;
     year?: string;
     month?: string;
   }) => Promise<void>;
-  updateMonthAsset: ({
-    year,
-    month,
-    asset,
-    user_id,
-  }: UpdateMonthAssetProps) => void;
+  updateMonthAsset: ({ year, month, asset, user_id }: MonthAssetProps) => void;
 };
 
 const monthAssetFormStore = create<MonthAssetFormStore>((set, get) => ({
@@ -59,19 +56,20 @@ const monthAssetFormStore = create<MonthAssetFormStore>((set, get) => ({
   complete: () => {
     set(() => ({ done: true }));
   },
-  fetchMonthAsset: async ({ year, month }) => {
+  fetchMonthAsset: async ({ user_id, year, month }) => {
     const monthAsset = await apiService.fetchMonthAsset({
+      user_id,
       year,
       month,
     });
     const { dw, saving, investment, pension, debt } = monthAsset;
 
     set(() => ({
-      dw: Number(dw),
-      saving: Number(saving),
-      investment: Number(investment),
-      pension: Number(pension),
-      debt: Number(debt),
+      dw,
+      saving,
+      investment,
+      pension,
+      debt,
     }));
   },
   updateMonthAsset: async ({ year, month, asset, user_id }) => {
