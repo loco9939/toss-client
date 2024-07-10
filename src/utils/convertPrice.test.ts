@@ -7,7 +7,7 @@ describe('convertPrice', () => {
       expect(convertPrice(10_000)).toBe('1만원');
       expect(convertPrice(20_000)).toBe('2만원');
       expect(convertPrice(100_000)).toBe('10만원');
-      expect(convertPrice(50_000_000)).toBe('5000만원');
+      expect(convertPrice(50_000_000)).toBe('5,000만원');
     });
   });
 
