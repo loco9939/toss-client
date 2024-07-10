@@ -18,6 +18,7 @@ class ApiService {
   });
 
   async fetchLatestAssets() {
+    // 기존 API 로직
     // try {
     //   const { data } = await this.instance.get<LatestAsset[]>(`/assets/latest`);
 
@@ -27,6 +28,8 @@ class ApiService {
     //   new Error(`Failed: ${error}`);
     //   return [];
     // }
+
+    // 변경된 API 로직
     const { data, error } = await supabase
       .from('assets')
       .select()

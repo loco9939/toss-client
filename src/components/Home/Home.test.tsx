@@ -1,14 +1,25 @@
 import { screen, waitFor } from '@testing-library/react';
 import Home from '.';
 
-import { mockGetLatestAssets } from '@/mocks/handlers';
-import { server } from '@/mocks/node';
+import fixtures from '@/fixtures';
+import useFetchLatestAssets from '@/hooks/useFetchLatestAssets';
 import { render } from '@/utils/test-helpers';
+
+// NOTE: Supabase MSW 연동을 못해서 직접 API를 mocking하는 로직으로 수정
+vi.mock('@/hooks/useFetchLatestAssets', () => ({
+  default: vi.fn(),
+}));
+
+const { latestAssets } = fixtures;
 
 const context = describe;
 describe('Home', () => {
   context('when fetch is success', () => {
     beforeEach(() => {
+      (useFetchLatestAssets as jest.Mock).mockReturnValue({
+        loading: false,
+        latestAssets: latestAssets,
+      });
       render(<Home />);
     });
 
@@ -30,12 +41,13 @@ describe('Home', () => {
   });
 
   context('when fetch is failed', () => {
-    beforeEach(() => {
-      server.use(mockGetLatestAssets('Error'));
-      render(<Home />);
-    });
-
     it('renders "자산 등록 하러 가기" button', async () => {
+      // server.use(mockGetLatestAssets('Error'));
+      (useFetchLatestAssets as jest.Mock).mockReturnValue({
+        loading: false,
+        latestAssets: [],
+      });
+      render(<Home />);
       await waitFor(() => {
         screen.getByRole('button', {
           name: '자산 등록 하러 가기',

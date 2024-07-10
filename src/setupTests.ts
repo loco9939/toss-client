@@ -12,20 +12,23 @@ vi.mock('zustand'); // to make it work like Jest (auto-mocking)
 
 vi.mock('recharts');
 
-vi.mock('@supabase/supabase-js', () => {
-  return {
-    createClient: vi.fn(() => {
-      return {
-        auth: {
-          signIn: vi.fn(),
-          signOut: vi.fn(),
-          getSession: vi.fn().mockResolvedValue({ data: { session: '' } }),
-          onAuthStateChange: vi.fn().mockReturnValue({
-            data: { subscription: { unsubscribe: vi.fn() } },
-          }),
-          getUser: vi.fn().mockResolvedValue({ data: { user: {} } }),
-        },
-      };
-    }),
-  };
-});
+// NOTE: actual 안쓰면 supabase 읽어오질 못하고, actual 쓰고 env 대신 직접 사용하면 실제 데이터를 요청하고...
+// vi.mock('@supabase/supabase-js', async importOriginal => {
+//   const actual = await importOriginal();
+//   return {
+//     ...actual,
+//     // your mocked methods
+//     // () => ({
+//     //   createClient: vi.fn(() => ({
+//     //     from: vi.fn(() => ({
+//     //       select: vi.fn(() => ({
+//     //         returns: vi.fn(() => ({
+//     //           data: [],
+//     //           error: null,
+//     //         })),
+//     //       })),
+//     //     })),
+//     //   })),
+//     // }),
+//   };
+// });

@@ -2,6 +2,9 @@ import { API_BASE_URL } from '@/api';
 import fixtures from '@/fixtures';
 import { http, HttpResponse } from 'msw';
 
+const SUPABASE_URL =
+  import.meta.env.VITE_NEXT_PUBLIC_SUPABASE_URL ??
+  'https://qvoiduranowziowofcvl.supabase.co';
 const { latestAssetsResponse, yearAssets } = fixtures;
 export const mockGetAssetResponse = (type?: 'Error') => {
   return http.get('http://localhost:5000/assets:id', ({ request }) => {
@@ -24,11 +27,13 @@ export const mockGetAssetResponse = (type?: 'Error') => {
 };
 
 export const mockGetLatestAssets = (type?: 'Error') => {
-  return http.get(`${API_BASE_URL}/assets/latest`, () => {
+  return http.get(`${SUPABASE_URL}/rest/v1/assets`, () => {
     if (type === 'Error') {
+      console.log('==========EEEEEERorro!!!');
       return new HttpResponse(null, { status: 404 });
     }
 
+    console.log('==========SSSSSSUCCESS!!!');
     return HttpResponse.json(latestAssetsResponse);
   });
 };
