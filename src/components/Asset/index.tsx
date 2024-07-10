@@ -1,6 +1,8 @@
 import useFetchYearAssets from '@/hooks/useFetchYearAssets';
+import sessionStore from '@/stores/sessionStore';
 import { useSearchParams } from 'react-router-dom';
 import styled from 'styled-components';
+import Spinner from '../UI/Spinner';
 import Legend from './Legend';
 import MonthAsset from './MonthAsset';
 import YearSelect from './YearSelect';
@@ -18,11 +20,14 @@ const Asset = () => {
   const [params] = useSearchParams();
 
   const year = params.get('year') ?? undefined;
-
-  const { loading, yearAssets } = useFetchYearAssets({ year });
+  const session = sessionStore(state => state.session);
+  const { loading, yearAssets } = useFetchYearAssets({
+    user_id: session?.user?.id ?? '',
+    year,
+  });
 
   if (loading) {
-    return <p>로딩중...</p>;
+    return <Spinner />;
   }
 
   return (

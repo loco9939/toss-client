@@ -5,9 +5,11 @@ import Summary from './Summary';
 
 import useFetchLatestAssets from '@/hooks/useFetchLatestAssets';
 
+import sessionStore from '@/stores/sessionStore';
 import convertAssetResponse from '@/utils/convertAssetResponse';
 import dayjs from 'dayjs';
 import styled from 'styled-components';
+import Spinner from '../UI/Spinner';
 
 const Button = styled.button.attrs({
   type: 'button',
@@ -28,11 +30,14 @@ const Button = styled.button.attrs({
 
 const Home = () => {
   const navigate = useNavigate();
-  const { loading, latestAssets } = useFetchLatestAssets();
+  const session = sessionStore(state => state.session);
+  const { loading, latestAssets } = useFetchLatestAssets({
+    user_id: session?.user?.id ?? '',
+  });
   const year = dayjs().get('year');
 
   if (loading) {
-    return <p>로딩중...</p>;
+    return <Spinner />;
   }
 
   if (latestAssets.length === 0) {
