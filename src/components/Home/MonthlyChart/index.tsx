@@ -51,7 +51,7 @@ const MonthlyChart = ({ latestAssets }: MonthlyChartProps) => {
             {isPositiveInt ? ' 늘었어요' : ' 줄었어요'}
           </p>
         </TextBox>
-        <Emoji>😀</Emoji>
+        <Emoji>{isPositiveInt ? '😀' : '🥲'}</Emoji>
       </Summary>
       <BarChart data={barChartData} />
     </Container>

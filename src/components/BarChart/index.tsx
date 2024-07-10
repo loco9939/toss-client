@@ -38,7 +38,7 @@ const Legend = styled.div`
 `;
 
 const labelListFormatter = (value: number) => {
-  return convertKRW(value / 10000);
+  return convertKRW(Number((value / 10000).toFixed(0)));
 };
 
 const BarChart = ({ data }: BarChartProps) => {

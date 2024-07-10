@@ -22,7 +22,7 @@ describe('Routes', () => {
     });
 
     it('renders Home Component', () => {
-      screen.getByText(/로딩중/);
+      screen.getByRole('spinner');
     });
   });
 

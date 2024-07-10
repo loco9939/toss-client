@@ -68,9 +68,9 @@ const SigninComplete = () => {
   return (
     <Container>
       <Icon>🎉</Icon>
+      <Text>환영합니다!</Text>
       <Text>
         <span>{session?.user?.user_metadata?.user_name ?? '회원'}</span>님
-        환영합니다!
       </Text>
       <Text>자산을 등록 해주세요!</Text>
 
