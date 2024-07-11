@@ -2,7 +2,7 @@ import monthAssetFormStore from '@/stores/monthAssetFormStore';
 import sessionStore from '@/stores/sessionStore';
 import convertKRW from '@/utils/convertKRW';
 import handleNumericChange from '@/utils/handleNumericChange';
-import { FormEventHandler, useState } from 'react';
+import { FormEventHandler, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
@@ -55,6 +55,8 @@ const Form = ({ assetId, month, year }: FormProps) => {
     investment,
     pension,
     debt,
+    submitLoading,
+    finishLoading,
     changeDw,
     changeSaving,
     changeInvestment,
@@ -87,10 +89,7 @@ const Form = ({ assetId, month, year }: FormProps) => {
 
     if (assetId) {
       updateMonthAsset({
-        // year: String(year),
-        // month: String(month),
         asset: { dw, saving, investment, pension, debt },
-        // user_id: session?.user.id,
         id: assetId,
       });
     } else {
@@ -101,11 +100,17 @@ const Form = ({ assetId, month, year }: FormProps) => {
         user_id: session?.user.id,
       });
     }
-
-    alert('자산이 등록되었습니다.');
-
-    navigate(`/assets?year=${year}`);
   };
+
+  useEffect(() => {
+    if (submitLoading) {
+      alert('자산이 등록되었습니다.');
+
+      navigate(`/assets?year=${year}`);
+    }
+
+    return () => finishLoading();
+  }, [submitLoading]);
 
   return (
     <StyledForm onSubmit={handleSubmit}>

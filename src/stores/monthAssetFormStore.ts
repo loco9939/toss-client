@@ -8,14 +8,12 @@ export type MonthAssetFormStore = {
   investment: number;
   pension: number;
   debt: number;
+  submitLoading: boolean;
   changeDw: (dw: string) => void;
   changeSaving: (saving: string) => void;
   changeInvestment: (investment: string) => void;
   changePension: (pension: string) => void;
   changeDebt: (debt: string) => void;
-  done: boolean;
-  resetDone: () => void;
-  complete: () => void;
   fetchMonthAsset: ({
     user_id,
     year,
@@ -33,6 +31,8 @@ export type MonthAssetFormStore = {
     user_id,
     id,
   }: MonthAssetProps) => void;
+  startLoading: () => void;
+  finishLoading: () => void;
 };
 
 const monthAssetFormStore = create<MonthAssetFormStore>((set, get) => ({
@@ -41,6 +41,7 @@ const monthAssetFormStore = create<MonthAssetFormStore>((set, get) => ({
   investment: 0,
   pension: 0,
   debt: 0,
+  submitLoading: false,
   changeDw: (dw: string) => {
     set(() => ({ dw: Number(dw) }));
   },
@@ -55,13 +56,6 @@ const monthAssetFormStore = create<MonthAssetFormStore>((set, get) => ({
   },
   changeDebt: (debt: string) => {
     set(() => ({ debt: Number(debt) }));
-  },
-  done: false,
-  resetDone: () => {
-    set(() => ({ done: false }));
-  },
-  complete: () => {
-    set(() => ({ done: true }));
   },
   fetchMonthAsset: async ({ user_id, year, month }) => {
     const monthAsset = await apiService.fetchMonthAsset({
@@ -93,7 +87,7 @@ const monthAssetFormStore = create<MonthAssetFormStore>((set, get) => ({
     }
   },
   insertMonthAsset: async ({ year, month, asset, user_id }) => {
-    get().resetDone();
+    get().startLoading();
 
     await apiService.insertMonthAsset({
       year,
@@ -102,25 +96,23 @@ const monthAssetFormStore = create<MonthAssetFormStore>((set, get) => ({
       user_id,
     });
 
-    get().complete();
+    get().finishLoading();
   },
-  updateMonthAsset: async ({
-    // year, month,
-    asset,
-    id,
-    //  , user_id
-  }) => {
-    get().resetDone();
+  updateMonthAsset: async ({ asset, id }) => {
+    get().startLoading();
 
     await apiService.updateMonthAsset({
-      // year,
-      // month,
       asset,
       id,
-      // user_id,
     });
 
-    get().complete();
+    get().finishLoading();
+  },
+  startLoading: () => {
+    set(() => ({ submitLoading: true }));
+  },
+  finishLoading: () => {
+    set(() => ({ submitLoading: false }));
   },
 }));
 
