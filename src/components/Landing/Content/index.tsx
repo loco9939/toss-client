@@ -30,6 +30,7 @@ const Heading = styled.h1`
 
   @media (max-width: 639px) {
     font-size: 3rem;
+    padding-block: 8rem;
   }
 `;
 
@@ -71,6 +72,10 @@ const ParagraphGrayBox = styled.div`
     gap: 2rem;
     font-size: 2.2rem;
   }
+
+  @media (max-width: 424px) {
+    font-size: 1.8rem;
+  }
 `;
 
 const ParagraphBoxContainer = styled.div`
@@ -97,6 +102,10 @@ const ParagraphBox = styled.div`
     justify-content: center;
     gap: 2rem;
     font-size: 2.2rem;
+  }
+
+  @media (max-width: 424px) {
+    font-size: 1.8rem;
   }
 `;
 

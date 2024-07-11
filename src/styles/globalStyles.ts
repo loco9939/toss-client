@@ -36,6 +36,7 @@ const GlobalStyle = createGlobalStyle`
   *::before,
   *::after {
     box-sizing: inherit;
+    word-break:keep-all;
   }
 
   body {
