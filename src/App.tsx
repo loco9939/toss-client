@@ -1,6 +1,7 @@
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
 import { Reset } from 'styled-reset';
+import useCleanHash from './hooks/useCleanHash';
 import useSession from './hooks/useSession';
 import routes from './routes';
 import defaultTheme from './styles/defaultTheme';
@@ -11,7 +12,7 @@ const router = createBrowserRouter(routes);
 function App() {
   const theme = defaultTheme;
 
-  // useCleanHash();
+  useCleanHash();
 
   useSession();
 
