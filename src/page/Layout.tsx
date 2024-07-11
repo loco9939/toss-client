@@ -9,8 +9,7 @@ const StyledLayout = styled.div`
   display: grid;
   grid-template-rows: auto 1fr auto;
 
-  min-width: 37.5rem;
-  width: 50rem;
+  max-width: 50rem;
   margin-inline: auto;
 
   main {

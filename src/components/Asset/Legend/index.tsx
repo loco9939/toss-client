@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 const List = styled.ul`
-  width: 55%;
+  width: fit-content;
   display: flex;
   justify-content: center;
   margin-top: 2.4rem;

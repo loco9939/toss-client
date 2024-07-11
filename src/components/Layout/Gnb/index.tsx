@@ -31,6 +31,11 @@ const Nav = styled.nav`
       background-color: ${props => props.theme.colors['text-primary']};
     }
   }
+
+  @media (max-width: 460px) {
+    font-size: 1rem;
+    gap: 0.4rem;
+  }
 `;
 
 const Gnb = () => {
