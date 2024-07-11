@@ -128,25 +128,45 @@ class ApiService {
     //   return { dw: 0, saving: 0, investment: 0, pension: 0, debt: 0 };
     // }
     // 변경된 API 로직
-    const { data, error } = await supabase
-      .from('assets')
-      .select()
-      .eq('user_id', user_id)
-      .eq('date', `${year}-${month?.padStart(2, '0')}`)
-      .returns<Record<string, string | number>[]>();
 
-    if (error) {
-      new Error(`Failed: ${error}`);
-      // return { dw: 0, saving: 0, investment: 0, pension: 0, debt: 0 };
-      return null;
-    } else {
-      if (data.length === 0) {
-        // return { dw: 0, saving: 0, investment: 0, pension: 0, debt: 0 };
+    if (!year || !month) {
+      const { data, error } = await supabase
+        .from('assets')
+        .select()
+        .eq('user_id', user_id)
+        .returns<Record<string, string | number>[]>();
+
+      if (error) {
+        new Error(`Failed: ${error}`);
         return null;
       } else {
-        // eslint-disable-next-line @typescript-eslint/no-unused-vars
-        const { user_id, ...rest } = data[0];
-        return { ...rest };
+        if (data.length === 0) {
+          return null;
+        } else {
+          // eslint-disable-next-line @typescript-eslint/no-unused-vars
+          const { user_id, ...rest } = data[0];
+          return { ...rest };
+        }
+      }
+    } else {
+      const { data, error } = await supabase
+        .from('assets')
+        .select()
+        .eq('user_id', user_id)
+        .eq('date', `${year}-${month?.padStart(2, '0')}`)
+        .returns<Record<string, string | number>[]>();
+
+      if (error) {
+        new Error(`Failed: ${error}`);
+        return null;
+      } else {
+        if (data.length === 0) {
+          return null;
+        } else {
+          // eslint-disable-next-line @typescript-eslint/no-unused-vars
+          const { user_id, ...rest } = data[0];
+          return { ...rest };
+        }
       }
     }
   }

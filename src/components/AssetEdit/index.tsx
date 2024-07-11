@@ -14,6 +14,9 @@ const PieChartContainer = styled.div`
   width: 25rem;
   height: 25rem;
   margin-inline: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
   * {
     outline: none;
@@ -21,8 +24,8 @@ const PieChartContainer = styled.div`
 `;
 
 const Nodata = styled.div`
-  width: 25rem;
-  height: 25rem;
+  width: 20rem;
+  height: 20rem;
   border-radius: 50%;
   opacity: 0.5;
   display: flex;
