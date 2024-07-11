@@ -18,7 +18,7 @@ const Heading = styled.h1`
   margin: auto;
   padding-block: 17rem;
   text-align: center;
-  width: 60rem;
+  /* width: 60rem; */
   color: #000000;
   font-family: ${props => props.theme.font.bold};
   font-size: 6rem;

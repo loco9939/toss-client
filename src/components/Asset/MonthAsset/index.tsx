@@ -29,6 +29,10 @@ const ListItem = styled.li`
   svg {
     cursor: pointer;
   }
+
+  @media (max-width: 380px) {
+    width: 45%;
+  }
 `;
 
 const Text = styled.p`
