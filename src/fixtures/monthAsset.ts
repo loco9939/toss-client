@@ -1,7 +1,7 @@
 import { LatestAsset } from '@/types';
 
 const monthAsset: LatestAsset = {
-  asset_id: 'asset_id_1',
+  id: 'asset_id_1',
   assets: {
     dw: 100000,
     saving: 150000,
