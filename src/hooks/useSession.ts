@@ -2,12 +2,12 @@ import sessionStore from '@/stores/sessionStore';
 import { useEffect } from 'react';
 
 const useSession = () => {
-  const { getSession, onAuthStateChange } = sessionStore();
+  const { onAuthStateChange } = sessionStore();
 
   useEffect(() => {
-    getSession();
+    const { subscription } = onAuthStateChange();
 
-    onAuthStateChange();
+    return () => subscription.unsubscribe();
   }, []);
 };
 

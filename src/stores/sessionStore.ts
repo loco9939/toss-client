@@ -1,14 +1,13 @@
 import { create } from 'zustand';
 
 import supabase from '@/utils/supabase';
-import { AuthError, Session, User } from '@supabase/supabase-js';
+import { AuthError, Session, Subscription, User } from '@supabase/supabase-js';
 import { persist } from 'zustand/middleware';
 
 export type SessionStore = {
   session: Session | null;
-  getSession: () => void;
   getUser: () => Promise<{ user: User | null; error: AuthError | null }>;
-  onAuthStateChange: () => void;
+  onAuthStateChange: () => { subscription: Subscription };
   signInWithKakao: () => void;
   signOut: () => void;
 };
@@ -17,13 +16,6 @@ const sessionStore = create(
   persist<SessionStore>(
     set => ({
       session: null,
-      getSession: async () => {
-        const {
-          data: { session },
-        } = await supabase.auth.getSession();
-
-        set(() => ({ session }));
-      },
       getUser: async () => {
         const {
           data: { user },
@@ -38,9 +30,13 @@ const sessionStore = create(
         return { user, error };
       },
       onAuthStateChange: () => {
-        supabase.auth.onAuthStateChange((_, session) => {
+        const {
+          data: { subscription },
+        } = supabase.auth.onAuthStateChange((_, session) => {
           set(() => ({ session }));
         });
+
+        return { subscription };
       },
       signInWithKakao: async () => {
         const { data: signInData, error: signInError } =
@@ -57,6 +53,7 @@ const sessionStore = create(
       },
       signOut: async () => {
         await supabase.auth.signOut();
+        set(() => ({ session: null }));
       },
     }),
     {

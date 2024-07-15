@@ -3,6 +3,7 @@ import { Outlet, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import Footer from '../components/Layout/Footer';
 import Header from '../components/Layout/Header';
+import useSession from '@/hooks/useSession';
 
 const StyledLayout = styled.div`
   min-height: 100vh;
@@ -21,6 +22,8 @@ const StyledLayout = styled.div`
 const Layout = () => {
   const navigate = useNavigate();
   const session = sessionStore(state => state.session);
+
+  useSession();
 
   if (!session) {
     navigate('/landing');
