@@ -5,6 +5,7 @@ import Form from '.';
 
 const insertMonthAsset = vi.fn();
 const updateMonthAsset = vi.fn();
+const finishLoading = vi.fn();
 
 vi.mock('@/stores/monthAssetFormStore', () => ({
   default: vi.fn(),
@@ -13,10 +14,7 @@ vi.mock('@/stores/monthAssetFormStore', () => ({
 const context = describe;
 describe('Form', () => {
   it('renders 입출금, 저축, 투자, 연금, 부채 input, label', () => {
-    (monthAssetFormStore as unknown as jest.Mock).mockReturnValue({
-      insertMonthAsset,
-      updateMonthAsset,
-    });
+    mockingReturnValue();
     render(<Form year={2024} month={12} />);
 
     screen.getByLabelText(/입출금/);
@@ -28,10 +26,7 @@ describe('Form', () => {
 
   context('when click 등록 button', () => {
     it('if it received assetId, it will call update API fn', () => {
-      (monthAssetFormStore as unknown as jest.Mock).mockReturnValue({
-        insertMonthAsset,
-        updateMonthAsset,
-      });
+      mockingReturnValue();
       render(<Form year={2024} month={12} assetId='test-asset' />);
 
       const button = screen.getByRole('button', { name: /등록/ });
@@ -41,10 +36,7 @@ describe('Form', () => {
     });
 
     it("if it don't received assetId, it will call insert API fn", () => {
-      (monthAssetFormStore as unknown as jest.Mock).mockReturnValue({
-        insertMonthAsset,
-        updateMonthAsset,
-      });
+      mockingReturnValue();
       render(<Form year={2024} month={12} />);
 
       const button = screen.getByRole('button', { name: /등록/ });
@@ -54,3 +46,11 @@ describe('Form', () => {
     });
   });
 });
+
+function mockingReturnValue() {
+  (monthAssetFormStore as unknown as jest.Mock).mockReturnValue({
+    insertMonthAsset,
+    updateMonthAsset,
+    finishLoading,
+  });
+}

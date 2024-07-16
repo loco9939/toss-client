@@ -1,18 +1,25 @@
 import { render, screen, waitFor } from '@testing-library/react';
 import { RouterProvider, createMemoryRouter } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
+import useCheckAsset from './hooks/useCheckAsset';
+import useSession from './hooks/useSession';
 import routes from './routes';
 import sessionStore from './stores/sessionStore';
 import defaultTheme from './styles/defaultTheme';
-import useCheckAsset from './hooks/useCheckAsset';
 
 const context = describe;
+
+const onAuthStateChange = vi.fn();
 
 vi.mock('@/stores/sessionStore', () => ({
   default: vi.fn(),
 }));
 
 vi.mock('@/hooks/useCheckAsset', () => ({
+  default: vi.fn(),
+}));
+
+vi.mock('@/hooks/useSession', () => ({
   default: vi.fn(),
 }));
 
@@ -89,7 +96,7 @@ describe('Routes', () => {
 
   context('when the current path is "/signin"', () => {
     it('renders 카카오톡', () => {
-      renderRouter('/signin', 'test-user');
+      renderRouter('/signin');
 
       screen.getByRole('login');
     });
@@ -100,6 +107,8 @@ export function renderRouter(path: string, session?: string) {
   const router = createMemoryRouter(routes, { initialEntries: [path] });
   (sessionStore as unknown as jest.Mock).mockReturnValue(session);
   (useCheckAsset as unknown as jest.Mock).mockReturnValue(false);
+  (useSession as unknown as jest.Mock).mockReturnValue(onAuthStateChange);
+
   render(
     <ThemeProvider theme={defaultTheme}>
       <RouterProvider router={router} />
