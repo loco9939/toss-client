@@ -1,5 +1,6 @@
 import AssetEditPage from './page/AssetEditPage';
 import AssetPage from './page/AssetPage';
+import DeleteAccountPage from './page/DeleteAccountPage';
 import HomePage from './page/HomePage';
 import LandingPage from './page/LandingPage';
 import Layout from './page/Layout';
@@ -30,6 +31,10 @@ const routes = [
       {
         path: '/asset-detail',
         element: <AssetEditPage />,
+      },
+      {
+        path: '/delete-account',
+        element: <DeleteAccountPage />,
       },
     ],
   },

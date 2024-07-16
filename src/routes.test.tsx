@@ -101,6 +101,15 @@ describe('Routes', () => {
       screen.getByRole('login');
     });
   });
+
+  context('when the current path is "/delete-account"', () => {
+    it('renders "취소하기", "탈퇴하기"', () => {
+      renderRouter('/delete-account', 'test-user');
+
+      screen.getByRole('button', { name: '취소하기' });
+      screen.getByRole('button', { name: '탈퇴하기' });
+    });
+  });
 });
 
 export function renderRouter(path: string, session?: string) {

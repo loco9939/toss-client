@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 const Container = styled.footer`
@@ -5,6 +6,10 @@ const Container = styled.footer`
   padding: 1.2rem;
   color: ${props => props.theme.colors['text-secondary']};
   background-color: ${props => props.theme.colors['bg-secondary']};
+
+  a {
+    color: ${props => props.theme.colors['toss-blue']};
+  }
 
   a:visited {
     color: ${props => props.theme.colors['toss-blue']};
@@ -23,6 +28,11 @@ const SocialMedia = styled.div`
 const Contact = styled.div`
   h4 {
     margin-bottom: 0.4rem;
+  }
+
+  a {
+    display: block;
+    margin-top: 4px;
   }
 `;
 
@@ -50,6 +60,7 @@ const Footer = () => {
       <Contact>
         <h4>연락처</h4>
         <p>이메일: kls9939@naver.com</p>
+        <Link to={'/delete-account'}>회원탈퇴</Link>
       </Contact>
     </Container>
   );

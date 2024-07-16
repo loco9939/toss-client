@@ -1,6 +1,7 @@
 import { create } from 'zustand';
 
-import supabase from '@/utils/supabase';
+import { apiService, DeleteProps } from '@/api';
+import { supabase } from '@/utils/supabase';
 import { AuthError, Session, Subscription, User } from '@supabase/supabase-js';
 import { persist } from 'zustand/middleware';
 
@@ -10,6 +11,7 @@ export type SessionStore = {
   onAuthStateChange: () => { subscription: Subscription };
   signInWithKakao: () => void;
   signOut: () => void;
+  deleteUser: ({ user_id }: DeleteProps) => void;
 };
 
 const sessionStore = create(
@@ -53,6 +55,11 @@ const sessionStore = create(
       },
       signOut: async () => {
         await supabase.auth.signOut();
+        set(() => ({ session: null }));
+      },
+      deleteUser: async ({ user_id }: DeleteProps) => {
+        await apiService.deleteUser({ user_id });
+        await apiService.deleteData({ user_id });
         set(() => ({ session: null }));
       },
     }),

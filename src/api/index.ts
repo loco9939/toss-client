@@ -1,5 +1,4 @@
-import supabase from '@/utils/supabase';
-import axios from 'axios';
+import { admin_supabase, supabase } from '@/utils/supabase';
 import dayjs from 'dayjs';
 
 export const API_BASE_URL =
@@ -13,23 +12,12 @@ export type MonthAssetProps = {
   id?: string;
 };
 
+export type DeleteProps = {
+  user_id?: string;
+};
+
 class ApiService {
-  private instance = axios.create({
-    baseURL: API_BASE_URL,
-  });
-
   async fetchLatestAssets({ user_id }: { user_id?: string }) {
-    // 기존 API 로직
-    // try {
-    //   const { data } = await this.instance.get<LatestAsset[]>(`/assets/latest`);
-
-    //   const latestAssetsRes = data.map(d => ({ ...d.assets, date: d.date }));
-    //   return latestAssetsRes;
-    // } catch (error) {
-    //   new Error(`Failed: ${error}`);
-    //   return [];
-    // }
-
     // 현재 날짜
     const currentDate = dayjs().format('YYYY-MM');
     // 6개월 전 날짜
@@ -64,22 +52,6 @@ class ApiService {
     user_id?: string;
     year?: string;
   }) {
-    // try {
-    //   const { data } = await this.instance.get<LatestAsset[]>(
-    //     `/assets/yearly`,
-    //     {
-    //       params: { year },
-    //     },
-    //   );
-
-    //   // BE 데이터 변형해주는 곳
-    //   const yearAssetsRes = data.map(d => ({ ...d.assets, date: d.date }));
-    //   return yearAssetsRes;
-    // } catch (error) {
-    //   new Error(`Failed: ${error}`);
-    //   return [];
-    // }
-
     // 1월
     const jan = dayjs(`${year}-01`).format('YYYY-MM');
     // 12월
@@ -116,19 +88,6 @@ class ApiService {
     year?: string;
     month?: string;
   }) {
-    // try {
-    //   const { data } = await this.instance.get<LatestAsset>(`/assets/monthly`, {
-    //     params: { year, month },
-    //   });
-    //   // BE 데이터 변형해주는 곳
-    //   const monthAssetRes = data.assets;
-    //   return monthAssetRes;
-    // } catch (error) {
-    //   new Error(`Failed: ${error}`);
-    //   return { dw: 0, saving: 0, investment: 0, pension: 0, debt: 0 };
-    // }
-    // 변경된 API 로직
-
     if (!year || !month) {
       const { data, error } = await supabase
         .from('assets')
@@ -172,16 +131,6 @@ class ApiService {
   }
 
   async insertMonthAsset({ year, month, asset, user_id }: MonthAssetProps) {
-    // try {
-    //   await this.instance.put(`/assets/monthly`, {
-    //     year,
-    //     month,
-    //     asset: { ...asset },
-    //   });
-    // } catch (error) {
-    //   throw new Error(`Failed to update asset: ${error}`);
-    // }
-
     const { error } = await supabase.from('assets').insert({
       user_id,
       date: `${year}-${month?.padStart(2, '0')}`,
@@ -194,29 +143,35 @@ class ApiService {
   }
 
   async updateMonthAsset({ asset, id }: MonthAssetProps) {
-    // try {
-    //   await this.instance.put(`/assets/monthly`, {
-    //     year,
-    //     month,
-    //     asset: { ...asset },
-    //   });
-    // } catch (error) {
-    //   throw new Error(`Failed to update asset: ${error}`);
-    // }
-
     const { error } = await supabase
       .from('assets')
       .update({
-        // user_id,
-        // date: `${year}-${month?.padStart(2, '0')}`,
         ...asset,
       })
       .eq('id', id);
-    // .eq('user_id', user_id)
-    // .eq('date', `${year}-${month?.padStart(2, '0')}`);
 
     if (error) {
       throw new Error(`Failed to update asset: ${error}`);
+    }
+  }
+
+  async deleteUser({ user_id }: DeleteProps) {
+    const { error } = await admin_supabase.auth.admin.deleteUser(user_id ?? '');
+
+    if (error) {
+      throw new Error(`Failed: ${error}`);
+    }
+  }
+
+  async deleteData({ user_id }: DeleteProps) {
+    const { data, status } = await supabase
+      .from('assets')
+      .delete()
+      .eq('user_id', user_id)
+      .select();
+
+    if (status === 200) {
+      return { data };
     }
   }
 }

@@ -1,8 +1,11 @@
 import { createClient } from '@supabase/supabase-js';
 
-const supabase = createClient(
+export const supabase = createClient(
   import.meta.env.VITE_NEXT_PUBLIC_SUPABASE_URL,
   import.meta.env.VITE_NEXT_PUBLIC_SUPABASE_ANON_KEY,
 );
 
-export default supabase;
+export const admin_supabase = createClient(
+  import.meta.env.VITE_NEXT_PUBLIC_SUPABASE_URL,
+  import.meta.env.VITE_NEXT_PUBLIC_SUPABASE_SERVICE_ROLE,
+);
