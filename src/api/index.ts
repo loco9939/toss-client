@@ -134,6 +134,7 @@ class ApiService {
     const { error } = await supabase.from('assets').insert({
       user_id,
       date: `${year}-${month?.padStart(2, '0')}`,
+      timestamptz: new Date(),
       ...asset,
     });
 
@@ -147,6 +148,7 @@ class ApiService {
       .from('assets')
       .update({
         ...asset,
+        timestamptz: new Date(),
       })
       .eq('id', id);
 
