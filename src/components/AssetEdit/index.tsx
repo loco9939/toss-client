@@ -67,7 +67,7 @@ const AssetEdit = () => {
       </PieChartContainer>
       <Legend />
 
-      <Form year={year} month={month} assetId={assetId} />
+      <Form year={year} month={month} assetId={assetId} isEmpty={isEmpty} />
     </section>
   );
 };

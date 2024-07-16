@@ -49,31 +49,41 @@ const Bar_Debt = styled.div.attrs({
 const SummaryBarChart = ({ assetList }: SummaryBarChartProps) => {
   return (
     <Container>
-      <Bar_Dw
-        style={{
-          width: `${setWidth('dw', assetList)}%`,
-        }}
-      />
-      <Bar_Saving
-        style={{
-          width: `${setWidth('saving', assetList)}%`,
-        }}
-      />
-      <Bar_Investment
-        style={{
-          width: `${setWidth('investment', assetList)}%`,
-        }}
-      />
-      <Bar_Pension
-        style={{
-          width: `${setWidth('pension', assetList)}%`,
-        }}
-      />
-      <Bar_Debt
-        style={{
-          width: `${setWidth('debt', assetList)}%`,
-        }}
-      />
+      {Boolean(setWidth('dw', assetList)) && (
+        <Bar_Dw
+          style={{
+            width: `${setWidth('dw', assetList)}%`,
+          }}
+        />
+      )}
+      {Boolean(setWidth('saving', assetList)) && (
+        <Bar_Saving
+          style={{
+            width: `${setWidth('saving', assetList)}%`,
+          }}
+        />
+      )}
+      {Boolean(setWidth('investment', assetList)) && (
+        <Bar_Investment
+          style={{
+            width: `${setWidth('investment', assetList)}%`,
+          }}
+        />
+      )}
+      {Boolean(setWidth('pension', assetList)) && (
+        <Bar_Pension
+          style={{
+            width: `${setWidth('pension', assetList)}%`,
+          }}
+        />
+      )}
+      {Boolean(setWidth('debt', assetList)) && (
+        <Bar_Debt
+          style={{
+            width: `${setWidth('debt', assetList)}%`,
+          }}
+        />
+      )}
     </Container>
   );
 };

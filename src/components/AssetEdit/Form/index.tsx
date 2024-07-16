@@ -10,6 +10,7 @@ type FormProps = {
   year: number;
   month: number;
   assetId?: string;
+  isEmpty: boolean;
 };
 
 const StyledForm = styled.form.attrs({ role: 'form' })`
@@ -47,7 +48,7 @@ const Legend = styled.p`
   font-size: ${props => props.theme.fontSize.sm};
 `;
 
-const Form = ({ assetId, month, year }: FormProps) => {
+const Form = ({ assetId, month, year, isEmpty }: FormProps) => {
   const navigate = useNavigate();
   const {
     dw,
@@ -86,6 +87,9 @@ const Form = ({ assetId, month, year }: FormProps) => {
 
   const handleSubmit: FormEventHandler<HTMLFormElement> = event => {
     event.preventDefault();
+    if (isEmpty) {
+      return alert('자산을 입력해주세요.');
+    }
 
     if (assetId) {
       updateMonthAsset({
