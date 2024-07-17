@@ -22,5 +22,5 @@ exports.config = {
   include: {
     I: './steps_file.js',
   },
-  name: 'vite-setting',
+  name: 'Tossfolio',
 };
